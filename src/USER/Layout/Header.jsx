@@ -4,15 +4,15 @@ import DropdownMenu from './Dropdown'
 function Header() {
   return (
     <>
-    <div className="flex justify-between bg-pink-900 p-5 items-center">
+    <div className="flex flex-col sm:flex-row justify-between bg-pink-900 p-5 items-center">
 
 
-      <div className="text-white text-2xl">ᕵᕼᗩᖇᙏᗩᙅᖻ</div>
+      <div className="text-white text-2xl mb-4 sm:mb-0">ᕵᕼᗩᖇᙏᗩᙅᖻ</div>
 
 
     {/* search bar start */}
     
-    <div className="flex items-center">
+    <div className="flex items-center mb-4 sm:mb-0">
             <div className="flex border border-orange-800 rounded">
                 <input
                     type="text"

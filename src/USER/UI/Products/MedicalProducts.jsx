@@ -33,8 +33,10 @@ function MedicalProducts() {
 
   return (
     <>
-    <div className="flex justify-between p-5 mx-16 mt-5">
-        <h1 className='text-4xl font-semibold'>Medical Products</h1>
+    <div className="p-5 mx-16 mt-5">
+        <h1 className='text-2xl sm:text-4xl font-semibold'>Medical Products</h1>
+    </div>
+    <div className="text-right mr-10">
         <Link to={''}><button className='text-pink-900 text-xl font-mono'>View All <i class="fa-solid fa-arrow-right"></i></button></Link>
     </div>
     
@@ -45,7 +47,7 @@ function MedicalProducts() {
                 MedicalProducts.map((item)=>{
                     return(
                         <>
-                        <Card className='border w-[280px] h-fit m-5'>
+                        <Card className='border w-[200px] sm:w-[250px] h-fit m-5'>
                             <Link to={`/products/${item.prdct_id}`}>
                                 <div className="bg-slate-500">
                                     <img className='' src={item.image} alt="Loading..." />

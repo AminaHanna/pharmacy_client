@@ -33,8 +33,10 @@ function UpcomingProducts() {
 
   return (
     <>
-    <div className="flex justify-between p-5 mx-16 mt-5">
-        <h1 className='text-4xl font-semibold'>Upcoming Products</h1>
+    <div className="p-5 mx-16 mt-5">
+        <h1 className='text-2xl sm:text-4xl font-semibold'>Upcoming Products</h1>
+    </div>
+    <div className="text-right mr-10">
         <Link to={''}><button className='text-pink-900 text-xl font-mono'>View All <i class="fa-solid fa-arrow-right"></i></button></Link>
     </div>
     
@@ -45,19 +47,18 @@ function UpcomingProducts() {
                 UpcomingProducts.map((item)=>{
                     return(
                         <>
-                        <Card className='border w-[280px] h-fit m-5'>
+                        <Card className='border w-[200px] sm:w-[250px] h-fit m-5'>
                             <Link to={`/products/${item.prdct_id}`}>
                                 <div className="bg-slate-500">
                                     <img className='' src={item.image} alt="Loading..." />
                                 </div>
-                                <div className="border p-4">
-                                    <p className='text-xl font-bold'>{item.prdctName}</p>
-                                    <p>{item.price}</p>
-                                </div>
                             </Link>
-                            <div className="">
-                                <button className='bg-pink-900 text-white rounded w-full py-2'>Add to Cart <i class="fa-solid fa-bag-shopping"></i></button>
-                            </div>
+                                <div className="border p-4">
+                                    <div className="flex justify-between">
+                                        <p className='text-xl font-bold'>{item.prdctName}</p>
+                                        <button className='text-pink-900 text-xl'><i class="fa-regular fa-heart"></i></button>
+                                    </div>
+                                </div>
                         </Card>
                         </>
                     )

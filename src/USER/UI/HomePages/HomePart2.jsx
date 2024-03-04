@@ -13,11 +13,11 @@ function HomePart2() {
 
           {/* left side */}
           <Link to={''}>
-            <div className="flex bg-purple-100 hover:bg-purple-200 m-3 rounded-3xl p-10 items-center">
+            <div className="flex flex-col sm:flex-row bg-purple-100 hover:bg-purple-200 m-3 rounded-3xl p-10 items-center">
                   <div className="">
                     <p className='bg-pink-900 text-white w-20 text-center rounded-lg p-1'>25% OFF</p>
-                    <p className='text-2xl font-bold'>BLACK GARLIC OIL</p>
-                    <p className='text-lg'>Stronger and Thicker<br/>Hair With Black Garlic<br/>Oil.</p>
+                    <p className='text-lg sm:text-2xl font-bold'>BLACK GARLIC OIL</p>
+                    <p className='text-sm sm:text-lg'>Stronger and Thicker<br/>Hair With Black Garlic<br/>Oil.</p>
                     <p className='font-thin line-through'>$39.00</p>
                     <p className='font-semibold'>$37.00 <span className='font-thin'>Including Tax</span></p>
                   </div>
@@ -39,7 +39,7 @@ function HomePart2() {
 
                       <div className="">
                         <p className='bg-pink-900 text-white w-20 text-center rounded-lg p-1'>25% OFF</p>
-                        <p className='text-xl'>Dental Care Set for Vivid<br/>and Bright Smiles</p>
+                        <p className='text-base sm:text-xl'>Dental Care Set for Vivid<br/>and Bright Smiles</p>
                         <p className='font-thin line-through'>$33.90</p>
                         <p className='font-semibold'>$22.90 <span className='font-thin'>Including Tax</span></p>
                       </div>
@@ -58,7 +58,7 @@ function HomePart2() {
 
                       <div className="">
                         <p className='bg-pink-900 text-white w-20 text-center rounded-lg p-1'>25% OFF</p>
-                        <p className='text-xl'>BANANA FLAVOURED<br/>TOOTHPASTE</p>
+                        <p className='text-base sm:text-xl'>BANANA FLAVOURED<br/>TOOTHPASTE</p>
                         <p className='font-thin line-through'>$39.90</p>
                         <p className='font-semibold'>$37.90 <span className='font-thin'>Including Tax</span></p>
                       </div>
