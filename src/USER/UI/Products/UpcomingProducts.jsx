@@ -37,17 +37,17 @@ function UpcomingProducts() {
         <h1 className='text-2xl sm:text-4xl font-semibold'>Upcoming Products</h1>
     </div>
     <div className="text-right mr-10">
-        <Link to={''}><button className='text-pink-900 text-xl font-mono'>View All <i class="fa-solid fa-arrow-right"></i></button></Link>
+        <Link to={''}><button className='text-pink-900 sm:text-xl font-mono'>View All <i class="fa-solid fa-arrow-right"></i></button></Link>
     </div>
     
     {/* Upcoming Products start */}
     
-    <div className="flex flex-wrap gap-7 justify-center">
+    <div className="flex flex-wrap gap-2 justify-center">
             {
                 UpcomingProducts.map((item)=>{
                     return(
                         <>
-                        <Card className='border w-[200px] sm:w-[250px] h-fit m-5'>
+                        <Card className='border w-[130px] sm:w-[250px] h-fit m-5'>
                             <Link to={`/products/${item.prdct_id}`}>
                                 <div className="bg-slate-500">
                                     <img className='' src={item.image} alt="Loading..." />
@@ -55,8 +55,8 @@ function UpcomingProducts() {
                             </Link>
                                 <div className="border p-4">
                                     <div className="flex justify-between">
-                                        <p className='text-xl font-bold'>{item.prdctName}</p>
-                                        <button className='text-pink-900 text-xl'><i class="fa-regular fa-heart"></i></button>
+                                        <p className='text-xs sm:text-xl font-bold'>{item.prdctName}</p>
+                                        <button className='text-pink-900 sm:text-xl'><i class="fa-regular fa-heart"></i></button>
                                     </div>
                                 </div>
                         </Card>

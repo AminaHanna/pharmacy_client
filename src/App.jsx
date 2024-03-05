@@ -19,6 +19,10 @@ import Orders from './USER/UI/Shopping/Orders/Orders'
 import Payment from './USER/UI/Shopping/Payment/Payment'
 import Address from './USER/UI/Shopping/Payment/Address'
 import AdminLayout from './ADMIN/Layout/AdminLayout'
+import EmailManagement from './ADMIN/Pages/Mail/EmailManagement'
+import OrderManagement from './ADMIN/Pages/Orders/OrderManagement'
+import SingleOrders from './ADMIN/Pages/Orders/SingleOrders'
+import OrderSearch from './ADMIN/Pages/Orders/OrderSearch'
 
 function App() {
   const router = createBrowserRouter ([
@@ -87,8 +91,20 @@ function App() {
       element: <AdminLayout/>,
       children: [
         {
-          path:"product",
-          element: <ProductDetails/>
+          path:"email",
+          element: <EmailManagement/>
+        },
+        {
+          path: "orders",
+          element: <OrderManagement/>
+        },
+        {
+          path: "single-orders",
+          element: <SingleOrders/>
+        },
+        {
+          path: "search-order",
+          element: <OrderSearch/>
         }
       ]
     },

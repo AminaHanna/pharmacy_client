@@ -12,7 +12,7 @@ function UserLayout() {
         <Header/>
       </div>
 
-    <div className="sm:pt-24 pt-52">
+    <div className="pt-24">
       <Outlet/>
     </div>
 

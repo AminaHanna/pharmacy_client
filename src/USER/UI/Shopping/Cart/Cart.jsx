@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { Card } from "@mui/material"
 
 function Cart() {
 
@@ -25,69 +25,62 @@ function Cart() {
     <>
     <div className="flex flex-wrap justify-center">
       {/* cart details */}
-        <div className="bg-slate-100 m-5 p-5 rounded-lg">
+        <div className="bg-slate-100 m-5 p-5 rounded-lg w-[400px] sm:w-[700px]">
           <div className="flex justify-between">
             <p className='font-bold text-lg'>Shopping Cart</p>
             <p className='font-bold'>2 items</p>
           </div>
-          <div className="m-5">
-            <table className=''>
-            <tr className=''>
-              <th className='font-thin'>PRODUCT_DETAILS</th>
-              <th className='font-thin'>QUANTITY</th>
-              <th className='font-thin'>PRICE</th>
-              <th className='font-thin'>TOTAL</th>
-            </tr>
+          <div className="m-3 flex flex-wrap">
+            {
+              cart.map((item)=>{
+                return(
+                  <>
+                  <Card className='w-[300px] m-2'>
+                    <div className="flex">
+                      <img src={item.image} alt="" className='w-[100px] m-2'/>
+                      <div className="mt-3">
+                        <p>{item.prdctName}</p>
+                        <div className="mt-3 flex justify-between p-3 gap-5 ">
+                          <p className='font-bold text-xs sm:text-base'>{item.price}</p>
+                          <p className='border px-3 flex gap-3'>
+                            <button className='text-lg'>-</button>
+                            <button className='font-bold text-xs sm:text-base'>0</button>
+                            <button>+</button>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                  </>
+                )
+              })
+            }
 
-              {
-                cart.map((item)=>{
-                  return(
-                    <>
-                    <tr className='border-b-2'>
-                        <td className='flex items-center p-5'>
-                          <img src={item.image} alt="" width="60px" />
-                          <p className='font-semibold'>{item.prdctName}</p>
-                        </td>
-                        <td className='p-5'><button className='font-bold text-2xl m-2'>-</button>
-                            <span className='px-2 rounded-md border border-black'>0</span>
-                            <button className='font-bold text-2xl m-2'>+</button>
-                        </td>
-                     
-                        <td className='font-semibold p-5'>{item.price}</td>
-                        <td className='font-semibold p-5'>total_price</td>
-                        <td><button><i class="fa-solid fa-trash"></i></button></td>
-                    </tr>
-                    </>
-                  )
-                })
-              }
-            </table>
-
-            <button className='text-pink-900 mt-3'><i class="fa-solid fa-arrow-left"></i> Continue Shopping</button>
+            {/* <button className='text-pink-900 mt-3'><i class="fa-solid fa-arrow-left"></i> Continue Shopping</button> */}
           </div>
         </div>
 
         {/* cart summary */}
-        <div className="bg-pink-50 m-5 p-5 rounded-lg w-[400px]">
+        <div className="bg-pink-50 m-5 p-5 rounded-lg w-[300px] sm:w-[400px]">
           <p className='font-bold text-lg p-5'>Order Summary</p>
           <p className='font-bold p-2'>ITEMS 2</p>
           <div className="flex justify-between p-2">
-            <p className='font-bold'>Subtotal</p>
-            <p className='font-bold'>sub_price</p>
+            <p className='font-bold text-xs sm:text-base'>Subtotal</p>
+            <p className='font-bold text-xs sm:text-base'>sub_price</p>
           </div>
           <div className="flex justify-between p-2">
-            <p className='font-bold'>Tax</p>
-            <p className='font-bold'>tax..</p>
+            <p className='font-bold text-xs sm:text-base'>Tax</p>
+            <p className='font-bold text-xs sm:text-base'>tax..</p>
           </div>
           <div className="flex justify-between p-2">
-            <p className='font-bold'>Shipping Cost</p>
-            <p className='font-bold'>shipping_price</p>
+            <p className='font-bold text-xs sm:text-base'>Shipping Cost</p>
+            <p className='font-bold text-xs sm:text-base'>shipping_price</p>
           </div>
           <div className="flex justify-between p-2 border-t-2 mt-5">
-            <p className='font-bold'>Estimated Total</p>
-            <p className='font-bold'>total</p>
+            <p className='font-bold text-xs sm:text-base'>Estimated Total</p>
+            <p className='font-bold text-xs sm:text-base'>total</p>
           </div>
-            <Link to={'/shipping-address'}><button className='bg-pink-900 hover:bg-pink-700 text-white rounded-md px-5 py-2 m-16'>PLACE ORDER</button></Link>
+            <Link to={'/shipping-address'}><button className='bg-pink-900 hover:bg-pink-700 text-white rounded-md px-5 py-2 m-16 text-xs sm:text-base'>PLACE ORDER</button></Link>
         </div>
 
     </div>

@@ -5,8 +5,10 @@ function Header() {
   return (
     <>
     <div className="w-full rounded-l-lg bg-pink-900 h-[60px] flex items-center justify-end">
-          <p className='text-white'>admin_name</p>
+        <div className="flex items-center">
+          <p className='text-white text-xs sm:text-base'>admin_name</p>
           <Avatar className='mx-5'/>
+        </div>
     </div>
     </>
   )

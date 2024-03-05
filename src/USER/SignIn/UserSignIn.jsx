@@ -59,7 +59,7 @@ function UserSignIn() {
     <div className="flex justify-center mt-10">
         <form onSubmit={handleSubmit} action="" className='w-[400px] h-[400px] border border-pink-800 rounded-3xl shadow-lg shadow-zinc-600 flex flex-col justify-center'>
             
-            <h1 className='text-pink-800 text-2xl m-5'>SIGN IN</h1>
+            <h1 className='text-pink-800 text-lg sm:text-2xl m-5'>SIGN IN</h1>
             {
                 formdatas.map(({placeholder, type,className, name }, index) => {
                     return(
@@ -71,7 +71,7 @@ function UserSignIn() {
                             type={type} 
                             name={name} 
                             placeholder={placeholder}
-                            className={`${className}  w-[60%] h-[40px] bg-white text-pink-900 flex justify-start ps-5 border border-pink-800 focus:border-pink-800 focus:outline-none focus:ring focus:ring-pink-200 rounded-md items-center m-3`}
+                            className={`${className}  sm:w-[60%] sm:h-[40px] bg-white text-pink-900 flex justify-start ps-5 border border-pink-800 focus:border-pink-800 focus:outline-none focus:ring focus:ring-pink-200 rounded-md items-center m-3`}
                             />
                             </div>
                         </>
@@ -79,9 +79,9 @@ function UserSignIn() {
                 })
             }
 
-            <input type='submit' className='bg-pink-800 text-white w-[350px] p-2 m-5 hover:bg-slate-500'/>
+            <input type='submit' className='bg-pink-800 text-white sm:w-[350px] text-xs sm:text-base p-2 m-5 hover:bg-slate-500'/>
 
-            <button className='text-pink-800'><Link to={'/user-signup'}>SignUp</Link></button>
+            <button className='text-pink-800 text-xs sm:text-base'><Link to={'/user-signup'}>SignUp</Link></button>
 
         </form>
     </div>

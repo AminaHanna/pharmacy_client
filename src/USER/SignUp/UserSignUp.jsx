@@ -57,7 +57,7 @@ function UserSignUp() {
     <div className="flex justify-center mt-10">
         <form onSubmit={handleSubmit} action="" className='w-[400px] h-[480px] border border-pink-800 rounded-3xl shadow-lg shadow-zinc-600 flex flex-col justify-center'>
             
-            <h1 className='text-pink-800 text-2xl m-5'>SIGN UP</h1>
+            <h1 className='text-pink-800 text-lg sm:text-2xl m-5'>SIGN UP</h1>
             {
                 formdatas.map(({placeholder, type,className, name }, index) => {
                     return(
@@ -69,7 +69,7 @@ function UserSignUp() {
                             type={type} 
                             name={name} 
                             placeholder={placeholder}
-                            className={`${className}  w-[60%] h-[40px] bg-white text-pink-900 flex justify-start ps-5 border border-pink-800 focus:border-pink-800 focus:outline-none focus:ring focus:ring-pink-200 rounded-md items-center m-3`}
+                            className={`${className}  sm:w-[60%] sm:h-[40px] bg-white text-pink-900 flex justify-start ps-5 border border-pink-800 focus:border-pink-800 focus:outline-none focus:ring focus:ring-pink-200 rounded-md items-center m-3`}
                             />
                             </div>
                         </>
@@ -77,13 +77,13 @@ function UserSignUp() {
                 })
             }
 
-            <input type='submit' className='bg-pink-800 text-white w-[350px] p-2 m-5 hover:bg-slate-500'/>
+            <input type='submit' className='bg-pink-800 text-white text-xs sm:text-base sm:w-[350px] p-2 m-5 hover:bg-slate-500'/>
 
             
             <div className="flex gap-2 ml-5">
-                <p className='font-semibold'>Have an account?</p>
+                <p className='font-semibold text-xs sm:text-base'>Have an account?</p>
                 <Link to={'/admin-signin'}>
-                    <button className='text-blue-700'>Sign in</button>
+                    <button className='text-blue-700 text-xs sm:text-base'>Sign in</button>
                 </Link>
             </div>
 

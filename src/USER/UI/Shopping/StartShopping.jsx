@@ -40,16 +40,16 @@ function StartShopping() {
                 Shopping.map((item)=>{
                     return(
                         <>
-                        <Card className='border w-[280px] h-fit m-5'>
+                        <Card className='border w-[130px] sm:w-[250px] h-fit m-5'>
                             <div className="bg-slate-500">
                                 <img className='' src={item.image} alt="Loading..." />
                             </div>
                             <div className="border p-4">
-                                <p className='text-xl font-bold'>{item.prdctName}</p>
-                                <p>{item.price}</p>
+                                <p className='text-xs sm:text-xl font-bold'>{item.prdctName}</p>
+                                <p className='text-xs sm:text-base'>{item.price}</p>
                             </div>
                             <div className="">
-                                <button className='bg-pink-900 text-white rounded w-full py-2'>Add to Cart</button>
+                                <button className='bg-pink-900 text-white text-xs sm:text-base rounded w-full py-2'>Add to Cart</button>
                             </div>
                         </Card>
                         </>

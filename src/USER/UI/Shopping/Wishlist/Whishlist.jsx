@@ -29,8 +29,8 @@ function Whishlist() {
           <div className="m-5">
             <table className=''>
             <tr className=''>
-              <th className='font-thin'>PRODUCT_DETAILS</th>
-              <th className='font-thin'>PRICE</th>
+              <th className='font-thin text-xs sm:text-base'>PRODUCT_DETAILS</th>
+              <th className='font-thin text-xs sm:text-base'>PRICE</th>
             </tr>
 
               {
@@ -40,11 +40,11 @@ function Whishlist() {
                     <tr className='border-b-2'>
                         <td className='flex items-center p-5'>
                           <img src={item.image} alt="" width="60px" />
-                          <p className='font-semibold'>{item.prdctName}</p>
+                          <p className='font-semibold text-xs sm:text-base'>{item.prdctName}</p>
                         </td>
                      
-                        <td className='font-semibold p-5'>{item.price}</td>
-                        <td><button><i class="fa-solid fa-trash"></i></button></td>
+                        <td className='font-semibold p-5 text-xs sm:text-base'>{item.price}</td>
+                        <td><button className='text-xs sm:text-base'><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                     </>
                   )
@@ -52,7 +52,7 @@ function Whishlist() {
               }
             </table>
 
-            <Link to={'/cart'}><button className='bg-pink-900 hover:bg-pink-700 text-white rounded-md px-5 py-2 m-16'>Move to Cart</button></Link>
+            <Link to={'/cart'}><button className='bg-pink-900 hover:bg-pink-700 text-white rounded-md px-5 py-2 m-16 text-xs sm:text-base'>Move to Cart</button></Link>
           </div>
         </div>
     </>
