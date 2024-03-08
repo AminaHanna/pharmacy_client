@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './Header'
 import { Outlet } from 'react-router-dom'
 import Footer from './Footer'
+import Chat from '../Chat/Chat'
 
 function UserLayout() {
   return (
@@ -15,6 +16,10 @@ function UserLayout() {
     <div className="pt-24">
       <Outlet/>
     </div>
+
+   <div className="fixed right-0 bottom-0 ">
+   <Chat/>
+   </div>
 
     <Footer/>
     </div>

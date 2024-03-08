@@ -1,6 +1,7 @@
 import { Avatar, Card } from '@mui/material';
 import React from 'react'
 import img from "../../../ExternalComponents/Images/black-garlic-oil.png"
+import { Link, useParams } from 'react-router-dom';
 
 function SingleOrders() {
 
@@ -8,6 +9,10 @@ function SingleOrders() {
 
   return (
     <>
+    <Link to={'/admin/orders/all'}>
+      <h className='text-2xl p-2'><i class="fa-solid fa-arrow-left"></i></h>
+    </Link>
+
     <div className="flex justify-center mt-10">
     <Card className="w-[180px] sm:w-[350px] m-5 p-2">
                           

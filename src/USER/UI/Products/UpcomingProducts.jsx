@@ -19,7 +19,7 @@ function UpcomingProducts() {
         },
         {
             image:"https://www.oxyaider.co.za/wp-content/uploads/2021/11/Made-of-medical-grade-PVC-.-1.png",
-            prdctName:"Non-rebreather mask",
+            prdctName:"Mask",
             price:"$12.90",
             prdct_id:"3rd prdct"
         },
@@ -42,7 +42,7 @@ function UpcomingProducts() {
     
     {/* Upcoming Products start */}
     
-    <div className="flex flex-wrap gap-2 justify-center">
+    <div className="flex flex-wrap justify-center">
             {
                 UpcomingProducts.map((item)=>{
                     return(
@@ -53,7 +53,7 @@ function UpcomingProducts() {
                                     <img className='' src={item.image} alt="Loading..." />
                                 </div>
                             </Link>
-                                <div className="border p-4">
+                                <div className="border p-2">
                                     <div className="flex justify-between">
                                         <p className='text-xs sm:text-xl font-bold'>{item.prdctName}</p>
                                         <button className='text-pink-900 sm:text-xl'><i class="fa-regular fa-heart"></i></button>

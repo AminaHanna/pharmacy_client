@@ -1,6 +1,6 @@
 import { Avatar, Card } from '@mui/material'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 function OrderManagement() {
 
@@ -29,19 +29,6 @@ function OrderManagement() {
     <>
     <div className="">
 
-        <nav className='flex justify-between m-5 border-b-2 border-pink-900'>
-            <div className="hidden md:block">
-                <button className='p-2 px-5 text-xs sm:text-base hover:bg-pink-900 hover:text-white'>All</button>
-                <button className='p-2 px-5 text-xs sm:text-base hover:bg-pink-900 hover:text-white'>New</button>
-                <button className='p-2 px-5 text-xs sm:text-base hover:bg-pink-900 hover:text-white'>Processing</button>
-                <button className='p-2 px-5 text-xs sm:text-base hover:bg-pink-900 hover:text-white'>Shipped</button>
-                <button className='p-2 px-5 text-xs sm:text-base hover:bg-pink-900 hover:text-white'>Cancelled</button>
-            </div>
-            <div className="">
-                <button  className='p-2 px-5 hover:bg-pink-900 hover:text-white rounded-full'><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-        </nav>
-
 
         <div className="flex flex-wrap justify-center">
             {
@@ -49,7 +36,6 @@ function OrderManagement() {
                     return(
                         <>
                         <Card className="w-[180px] sm:w-[250px] m-5 p-2">
-                            <Link to={''} >
                                 <div className="flex justify-between">
                                     <div className="">
                                         <p className='text-xs sm:text-base text-slate-500 font-thin'>{item.orderId}</p>
@@ -61,6 +47,8 @@ function OrderManagement() {
                                         <Avatar className=''/>
                                     </div>
                                 </div>
+                            <Link to={'/admin/single-orders'} >
+                                <button className='mt-2 px-2 border border-pink-900'>check</button>
                             </Link>
                         </Card>
                         

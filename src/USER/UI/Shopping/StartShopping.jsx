@@ -22,7 +22,7 @@ function StartShopping() {
         },
         {
             image:"https://www.oxyaider.co.za/wp-content/uploads/2021/11/Made-of-medical-grade-PVC-.-1.png",
-            prdctName:"Non-rebreather mask",
+            prdctName:"Mask",
             price:"$12.90"
         },
         {
@@ -44,7 +44,7 @@ function StartShopping() {
                             <div className="bg-slate-500">
                                 <img className='' src={item.image} alt="Loading..." />
                             </div>
-                            <div className="border p-4">
+                            <div className="border p-2">
                                 <p className='text-xs sm:text-xl font-bold'>{item.prdctName}</p>
                                 <p className='text-xs sm:text-base'>{item.price}</p>
                             </div>

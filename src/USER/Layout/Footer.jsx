@@ -6,7 +6,7 @@ function Footer() {
     <>
       <footer className="bg-pink-900 text-white">
 
-        <div className="flex gap-3 flex-wrap p-5 justify-around">
+        <div className="grid sm:flex gap-3 sm:flex-wrap p-5 justify-around">
 
           <div className="">
               <p className='sm:text-xl'>Contact</p>
@@ -59,7 +59,7 @@ function Footer() {
 
 
 
-        <div className="flex justify-around font-mono bg-pink-900 pb-5">
+        <div className="grid sm:flex justify-around font-mono bg-pink-900 pb-5">
           <Link to={''}><p className='text-xs sm:text-base'>2024 HEALTHY.All rights reserved.</p></Link>
           <Link to={''}><p className='text-xs sm:text-base'>Terms and Conditions</p></Link>
         </div>

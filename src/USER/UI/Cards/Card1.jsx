@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Card1() {
   return (
     <>
-    <div className="flex flex-wrap justify-evenly my-5">
+    <div className="grid sm:flex flex-wrap justify-evenly my-5">
           <Link to={`/cards/${'off'}`}>
             <div className="bg-slate-200 hover:bg-slate-300 flex gap-2 justify-around sm:text-2xl text-base p-5 rounded-3xl items-center m-2">
               <i class="fa-solid fa-circle-exclamation"></i>

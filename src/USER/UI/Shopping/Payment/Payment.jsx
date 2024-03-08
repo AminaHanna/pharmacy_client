@@ -34,7 +34,7 @@ function Payment() {
                     <p className="mb-3 text-xs sm:text-base">Choose a payment Method</p>
                     <input
                       type="radio"
-                      id="creditCard"
+                      id="onlinePayment"
                       name="paymentMethod"
                       value="creditCard"
                       className="mr-2"

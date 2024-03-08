@@ -24,7 +24,7 @@ function Dropdown() {
       {isOpen && (
         <div className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           <div className="py-1">
-            <Link to={''}
+            <Link to={'account'}
               className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
             >
               My Account
@@ -52,6 +52,12 @@ function Dropdown() {
               className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
             >
               Wishlist
+            </Link>
+
+            <Link to={'/admin'}
+              className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
+            >
+              Admin
             </Link>
 
             <Link to={'/user-signup'}

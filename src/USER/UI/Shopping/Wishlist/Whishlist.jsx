@@ -21,7 +21,7 @@ function Whishlist() {
 
   return (
     <>
-    <div className="bg-slate-100 p-5 rounded-lg w-[400px] m-auto my-5">
+    <div className="bg-slate-100 p-5 rounded-lg w-[350px] m-auto my-5">
           <div className="flex justify-between">
             <p className='font-bold text-lg'>Your Wishlist</p>
             <p className='font-bold'>2 items</p>

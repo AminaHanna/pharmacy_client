@@ -20,7 +20,7 @@ function Orders() {
 
   return (
     <>
-    <div className="bg-slate-100 p-5 rounded-lg w-[400px] md:w-[850px] m-auto my-5">
+    <div className="bg-slate-100 p-5 rounded-lg w-[350px] md:w-[850px] m-auto my-5">
           <div className="flex justify-between">
             <p className='font-bold text-lg'>My Orders</p>
             <p className='font-bold'>2 items</p>

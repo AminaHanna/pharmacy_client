@@ -25,7 +25,7 @@ function Cart() {
     <>
     <div className="flex flex-wrap justify-center">
       {/* cart details */}
-        <div className="bg-slate-100 m-5 p-5 rounded-lg w-[400px] sm:w-[700px]">
+        <div className="bg-slate-100 m-5 p-5 rounded-lg w-[350px] sm:w-[700px]">
           <div className="flex justify-between">
             <p className='font-bold text-lg'>Shopping Cart</p>
             <p className='font-bold'>2 items</p>

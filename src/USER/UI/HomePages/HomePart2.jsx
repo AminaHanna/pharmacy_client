@@ -13,8 +13,8 @@ function HomePart2() {
 
           {/* left side */}
           <Link to={''}>
-            <div className="flex flex-col sm:flex-row bg-purple-100 hover:bg-purple-200 m-3 rounded-3xl p-10 items-center">
-                  <div className="">
+            <div className="flex flex-col sm:flex-row bg-purple-100 hover:bg-purple-200 m-3 rounded-3xl p-6 sm:p-10 sm:items-center">
+                  <div className="py-5 sm:py-1 text-left">
                     <p className='bg-pink-900 text-white w-20 text-center rounded-lg p-1'>25% OFF</p>
                     <p className='text-lg sm:text-2xl font-bold'>BLACK GARLIC OIL</p>
                     <p className='text-sm sm:text-lg'>Stronger and Thicker<br/>Hair With Black Garlic<br/>Oil.</p>
@@ -23,7 +23,7 @@ function HomePart2() {
                   </div>
 
                   <div className="">
-                    <img src={image1} alt="" className='w-[72vh]' />
+                    <img src={image1} alt="" className='w-[40vh] sm:w-[72vh]' />
                   </div>
             </div>
           </Link>
