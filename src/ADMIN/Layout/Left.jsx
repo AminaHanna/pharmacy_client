@@ -1,7 +1,15 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 function Left() {
+
+    const navigate = useNavigate();
+
+    const logout = ()=>{
+        localStorage.removeItem("adminToken")
+        localStorage.removeItem("adminData")
+        navigate('/admin-signin')
+    }
   return (
     <>
     <div className="">
@@ -35,7 +43,7 @@ function Left() {
         <NavLink to={'email'}>
             <button className='text-xs sm:text-base px-5 py-3 w-full text-start text-pink-900 hover:bg-pink-900 hover:text-white'>Email Management</button>
         </NavLink>
-        <NavLink to={''}>
+        <NavLink onClick={logout}>
             <button className='text-xs sm:text-base px-5 py-3 w-full text-start text-pink-900 hover:bg-pink-900 hover:text-white'>Logout</button>
         </NavLink>
     </div>

@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Left from "./Left";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import LeftLayout from "./LeftLayout";
 
 function AdminLayout() {
+  const [ tokenState, setTokenState ] = useState(Boolean(localStorage.getItem("adminToken")));
+
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!tokenState) {
+      navigate('/admin-signin')
+    }
+  }, [navigate, tokenState]);
+
+
   return (
     <>
-    
+    {
+      tokenState?
+
       <div className="">
 
         <div className="flex">
@@ -29,6 +42,13 @@ function AdminLayout() {
         </div>
 
       </div>
+
+
+        :
+
+       navigate('admin-signin')
+
+      }
     </>
   );
 }

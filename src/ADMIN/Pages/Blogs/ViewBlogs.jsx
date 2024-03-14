@@ -1,25 +1,45 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { errorToast } from '../../../ExternalComponents/Toast/Toast'
 
 function ViewBlogs() {
+  const [ Blogs, setBlogs ] = useState([]);
 
-    const Blogs = [
-        {
-          date:"24 Dec 2023",
-          blog_title: "Heading",
-          blog_description: "description about it......"
-        },
-        {
-          date:"24 Dec 2023",
-          blog_title: "Heading",
-          blog_description: "description about it......"
-        },
-        {
-          date:"24 Dec 2023",
-          blog_title: "Heading",
-          blog_description: "description about it......"
+    // const Blogs = [
+    //     {
+    //       date:"24 Dec 2023",
+    //       blog_title: "Heading",
+    //       blog_description: "description about it......"
+    //     },
+    //     {
+    //       date:"24 Dec 2023",
+    //       blog_title: "Heading",
+    //       blog_description: "description about it......"
+    //     },
+    //     {
+    //       date:"24 Dec 2023",
+    //       blog_title: "Heading",
+    //       blog_description: "description about it......"
+    //     }
+    //   ]
+
+    useEffect(()=>{
+      fetchAPI()
+    },[])
+
+    const fetchAPI = async(e) =>{
+      try {
+          const response = await axios.get("http://localhost:3000/api/blogs",{headers:{
+            'Authorization':`Bearer ${localStorage.getItem("adminToken")} `
+          }})
+          console.log(response,"res");
+    
+          setBlogs(response.data.Blogs)
+        } catch (error) {
+          errorToast(error.message);
         }
-      ]
+  }
 
   return (
     <>
@@ -32,8 +52,8 @@ function ViewBlogs() {
 
           <div className="">
             <p className='text-xs sm:text-base'>{item.date}</p>
-            <p className='text-base sm:text-lg m-3'>{item.blog_title}</p>
-            <p className='text-xs sm:text-base'>{item.blog_description}</p>
+            <p className='text-base sm:text-lg m-3'>{item.title}</p>
+            <p className='text-xs sm:text-base'>{item.description}</p>
           </div>
 
           <div className=" flex gap-3">

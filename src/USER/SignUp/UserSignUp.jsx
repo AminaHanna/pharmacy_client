@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userSignup } from '../../ExternalComponents/api/user';
 import { errorToast, successToast } from '../../ExternalComponents/Toast/Toast';
 
 function UserSignUp() {
 
     const [ formField, setFormField ] = useState({});
+    const navigate = useNavigate();
 
 
     const formdatas = [
@@ -46,6 +47,8 @@ function UserSignUp() {
         try{
             const response = await userSignup(formField)
             successToast(response.data.message);
+
+            navigate('/user-signin')
         } catch (error){
             errorToast(error.response.data.message, 'error')
         }
@@ -77,12 +80,12 @@ function UserSignUp() {
                 })
             }
 
-            <input type='submit' className='bg-pink-800 text-white text-xs sm:text-base sm:w-[350px] p-2 m-5 hover:bg-slate-500'/>
+                <input type='submit' className='bg-pink-800 text-white text-xs sm:text-base sm:w-[350px] p-2 m-5 hover:bg-slate-500'/>
 
             
             <div className="flex gap-2 ml-5">
                 <p className='font-semibold text-xs sm:text-base'>Have an account?</p>
-                <Link to={'/admin-signin'}>
+                <Link to={'/user-signin'}>
                     <button className='text-blue-700 text-xs sm:text-base'>Sign in</button>
                 </Link>
             </div>

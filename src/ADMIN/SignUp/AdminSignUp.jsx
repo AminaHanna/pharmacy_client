@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { adminSignup } from '../../ExternalComponents/api/admin';
 import { errorToast, successToast } from '../../ExternalComponents/Toast/Toast';
 
 function AdminSignUp() {
 
     const [ formField, setFormField ] = useState({});
+    const navigate = useNavigate();
+
+  const [ tokenState, setTokenState ] = useState(Boolean(localStorage.getItem("adminToken")));
+
 
 
     const formdatas = [
@@ -35,6 +39,13 @@ function AdminSignUp() {
         }
     ]
 
+    useEffect(() => {
+        if(tokenState) {
+          navigate('/admin')
+        }
+      }, [navigate, tokenState]);
+    
+
 
     const onChangeValues = (e) => {
         console.log(e.target.value);
@@ -46,6 +57,8 @@ function AdminSignUp() {
         try{
             const response = await adminSignup(formField)
             successToast(response.data.message);
+            navigate('/admin-signin')
+            
         } catch (error){
             errorToast(error.response.data.message, 'error')
         }

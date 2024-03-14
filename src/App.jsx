@@ -29,7 +29,6 @@ import ProductAdd from './ADMIN/Pages/Products/ProductAdd'
 import Chat from './USER/Chat/Chat'
 import ProductEdit from './ADMIN/Pages/Products/ProductEdit'
 import Products from './ADMIN/Pages/Products/Products'
-import Banners from './ADMIN/Pages/Banner/Banners'
 import Categories from './ADMIN/Pages/Categories/Categories'
 import ViewCategories from './ADMIN/Pages/Categories/ViewCategories'
 import EditCategories from './ADMIN/Pages/Categories/EditCategories'
@@ -52,6 +51,9 @@ import AddBlogs from './ADMIN/Pages/Blogs/AddBlogs'
 import UpdateProfile from './ADMIN/Pages/Profile.jsx/UpdateProfile'
 import Account from './USER/Account/Account'
 import Loadd from './USER/Loading/Loadd'
+import BannerLayout from './ADMIN/Pages/Banner/BannerLayout'
+import BannerPreview from './ADMIN/Pages/Banner/BannerPreview'
+import BannerAdd from './ADMIN/Pages/Banner/BannerAdd'
 
 function App() {
   const router = createBrowserRouter ([
@@ -59,13 +61,13 @@ function App() {
       path: "/",
       element: <UserLayout/>,
       children: [
-        // {
-        //   path: "",
-        //   element: <UserHome/>
-        // },
         {
           path:"",
           element: <Loadd/>
+        },
+        {
+          path: "",
+          element: <UserHome/>
         },
         {
           path: "account",
@@ -126,6 +128,8 @@ function App() {
       ]
     },
 
+    
+
 
     {
       path: "/admin",
@@ -147,7 +151,17 @@ function App() {
         },
         {
           path: "banner",
-          element: <Banners/>
+          element: <BannerLayout/>,
+          children: [
+            {
+              path: "",
+              element: <BannerPreview/>
+            },
+            {
+              path: "banner-add",
+              element: <BannerAdd/>
+            }
+          ]
         },
         {
           path:"email",

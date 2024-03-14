@@ -1,11 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { adminSignin } from '../../ExternalComponents/api/admin';
 import { errorToast, successToast } from '../../ExternalComponents/Toast/Toast';
+import { jwtDecode } from "jwt-decode";
 
 function AdminSignIn() {
 
     const [ formField, setFormField ] = useState({});
+
+
+
+// const token = localStorage.getItem("adminToken");
+// const decoded = jwtDecode(token);
+
+// console.log(decoded,'decoded');
+
+
+// const decodedHeader = jwtDecode(token, { header: true });
+// console.log(decodedHeader);
+
+  const [ tokenState, setTokenState ] = useState(Boolean(localStorage.getItem("adminToken")));
+
 
     const navigate = useNavigate();
     
@@ -25,6 +40,13 @@ function AdminSignIn() {
         }
     ]
 
+    useEffect(() => {
+      if(tokenState) {
+        navigate('/admin')
+      }
+    }, [navigate, tokenState]);
+  
+
 
     const onChangeValues = (e) => {
         console.log(e.target.value);
@@ -39,16 +61,16 @@ function AdminSignIn() {
             const response = await adminSignin(formField);
 
             successToast(response.data.message);
-            console.log(response.data.token, "token...");
+            console.log("token...", response.data.token);
 
             if (!response.data.token) {
                 return errorToast("Token is not Provided")
             }
 
-            localStorage.setItem("token",response.data.token);
-            localStorage.setItem("users",JSON.stringify(response.data.users))
+            localStorage.setItem("adminToken",response.data.token);
+            localStorage.setItem("adminData",JSON.stringify(response.data.users))
 
-            navigate('/')
+            navigate('/admin')
         } catch (error) {
             errorToast(error.response.data.message, "error")
         }
