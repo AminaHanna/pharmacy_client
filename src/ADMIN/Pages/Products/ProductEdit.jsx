@@ -19,7 +19,7 @@ function ProductEdit() {
           'Authorization':`Bearer ${localStorage.getItem("adminToken")} `
         }})
   
-        setEdit(response.data.users)
+        // setEdit(response.data.users)
         console.log(response,"response");
 
         successToast("Edited Succesfully")

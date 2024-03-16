@@ -1,7 +1,26 @@
 import { Avatar } from '@mui/material'
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { errorToast } from '../../../ExternalComponents/Toast/Toast';
 
 function UserManagement() {
+
+    const [users,setUsers] = useState([]);
+
+    useEffect(()=>{
+      fetchUsers()
+    },[])
+  
+    const fetchUsers=async()=>{
+      try {
+        const response = await axios.get("http://localhost:3000/api/user")
+         console.log(response,"responseee");    
+        setUsers(response.data.users)      
+      } catch (error) {
+        errorToast(error.message || 'error')
+      }
+    }
+
     
     const UserManagement = [
         {
@@ -29,15 +48,16 @@ function UserManagement() {
     <div className="">
         <div className="flex flex-wrap justify-center gap-5 m-5">
             {
-                UserManagement.map((item)=>{
+                users.map((item)=>{
                     return(
                         <>
                         <div className="p-5 border border-pink-900 rounded-xl shadow-md w-[150px] sm:w-[200px]">
                             <Avatar/>
-                            <p className='text-xs sm:text-base text-slate-600'>{item.userId}</p>
-                            <p className='text-xs sm:text-base font-semibold'>{item.userfname}</p>
-                            <p className='text-xs sm:text-base font-semibold'>{item.userlname}</p>
-                            <p className='text-xs sm:text-base text-slate-600'>{item.date}</p>
+                            <p className='text-xs my-2 text-slate-600'>{item._id}</p>
+                            <p className='text-xs sm:text-base font-semibold'>{item.userFname} {item.userLname}</p>
+                            <p className='text-xs sm:text-base font-semibold'>{item.userEmail}</p>
+                            <p className='text-xs text-slate-600'>created At : </p>
+                            <p className='text-xs text-slate-600'>{item.createdAt}</p>
                         </div>
                         </>
                     )
