@@ -45,7 +45,7 @@ function UpdateProfile() {
                 <input  value={editData.adminLname} type="text" placeholder='second name' name='adminLname' onChange={onChangeValues} className='outline outline-1 text-xs sm:text-base rounded px-2' />
                 <input  value={editData.adminEmail} type="email" placeholder='email' name='adminEmail' onChange={onChangeValues} className='outline outline-1 text-xs sm:text-base rounded px-2' />
 {JSON.stringify(editData)}
-                <input type="submit"  className='text-pink-900 border-pink-900 border text-xs sm:text-base hover:bg-pink-900 hover:text-white'/>
+                <input type="submit" className='text-pink-900 border-pink-900 border text-xs sm:text-base hover:bg-pink-900 hover:text-white'/>
             </div>
         </form>
     </div>

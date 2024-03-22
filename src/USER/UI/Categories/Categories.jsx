@@ -1,13 +1,34 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { errorToast } from '../../../ExternalComponents/Toast/Toast';
 
 function Categories() {
-
   const [showCategories, setShowCategories] = useState(false);
-
+  const [ categories,setCategories ] = useState([]);
+  
   const toggleCategories = () => {
     setShowCategories(!showCategories);
   };
+
+  
+  useEffect(()=>{
+    fetchAPI()
+  },[])
+
+
+  const fetchAPI = async(e) =>{
+    try {
+        const response = await axios.get("http://localhost:3000/api/categories",{headers:{
+          'Authorization':`Bearer ${localStorage.getItem("adminToken")} `
+        }})
+        console.log(response,"res");
+  
+        setCategories(response.data.Category)
+      } catch (error) {
+        errorToast(error.message)
+      }
+}
 
   return (
     <>
@@ -16,11 +37,20 @@ function Categories() {
 
 
         <div className="hidden sm:flex flex-wrap justify-center gap-5 m-auto w-[full]">
-        <Link to={`/shopping/${'pain-releif'}`} className='hover:bg-slate-100 p-2 rounded-lg'>
-            <p>Pain Relief</p>
-          </Link>
 
-          <Link to={`/shopping/${'coldandflu'}`} className='hover:bg-slate-100 p-2 rounded-lg'>
+        { categories && categories.map((item,i)=>{
+                return(
+                <> 
+                <Link to={`/shopping/${item._id}` } className='hover:bg-slate-100 p-2 rounded-lg'>
+                      <p>{item.name}</p>
+                </Link>
+                </>
+                )
+              })
+            }
+       
+
+          {/* <Link to={`/shopping/${'coldandflu'}`} className='hover:bg-slate-100 p-2 rounded-lg'>
             <p>Cold and Flu</p>
           </Link>
 
@@ -54,7 +84,7 @@ function Categories() {
 
           <Link to={`/shopping/${'respiratory-health'}`} className='hover:bg-slate-100 p-2 rounded-lg'>
             <p>Respiratory Health</p>
-          </Link>
+          </Link> */}
         </div>
 
 

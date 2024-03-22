@@ -14,7 +14,7 @@ import HomePart4 from '../UI/HomePages/HomePart4'
 
 function UserHome() {
   return (
-    <>
+    <div id='user-header'>
     <Categories/>
     <HomePart1/>
     <Card1/>
@@ -27,7 +27,7 @@ function UserHome() {
     <UpcomingProducts/>
     <HomePart3/>
     <HomePart4/>
-    </>
+    </div>
   )
 }
 

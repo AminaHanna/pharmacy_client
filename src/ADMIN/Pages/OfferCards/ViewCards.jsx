@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { errorToast } from '../../../ExternalComponents/Toast/Toast'
+import { errorToast, successToast } from '../../../ExternalComponents/Toast/Toast'
 
 function ViewCards() {
-  const [ Offercard, setOffercard ] = useState([])
+  const [ Offercard, setOffercard ] = useState([]);
+  const [refresh, setRefresh] = useState(true);
 
     // const Cards = [
     //     {
@@ -24,7 +25,7 @@ function ViewCards() {
 
       useEffect(()=>{
         fetchAPI()
-      },[])
+      },[refresh])
 
       const fetchAPI = async(e) =>{
         try {
@@ -38,6 +39,21 @@ function ViewCards() {
             errorToast(error.message);
           }
     }
+
+
+
+    const handleDelete = async(id)=>{
+      try {
+        const response = await axios.delete(`http://localhost:3000/api/cards/${id}`,{headers:{
+              'Authorization':`Bearer ${localStorage.getItem("adminToken")} `
+            }})
+
+            setRefresh(!refresh)
+        successToast("Deleted Succesfully");
+      } catch (error) {
+        errorToast(error.message);
+      }
+    }
     
 
   return (
@@ -47,7 +63,12 @@ function ViewCards() {
         Offercard.map((item)=>{
           return(
           <>
-          <div className="flex flex-col justify-between items-center m-5 p-5 w-[150px] sm:w-[200px] h-[150px] sm:h-[200px] border border-slate-400 shadow-md shadow-slate-600 rounded-lg">
+          <div className="flex flex-col justify-between items-center m-5 p-5 w-[150px] sm:w-[350px] h-[150px] sm:h-[500px] border border-slate-400 shadow-md shadow-slate-600 rounded-lg">
+
+
+          <div className="">
+              <img src={item.image} alt="" className=' w-[200px] sm:w-[180px] sm:h-[180px]' />
+            </div>
 
           <div className="">
             <p className='text-base sm:text-lg'>{item.title}</p>
@@ -57,8 +78,8 @@ function ViewCards() {
           </div>
 
           <div className=" flex gap-3">
-            <Link to={'/admin/offer-cards/edit-cards'}><button  className='border border-pink-900 px-3 py-1 my-2 hover:bg-pink-900 hover:text-white text-xs sm:text-base rounded'>Edit</button></Link>
-            <button  className='border border-pink-900 px-3 py-1 my-2 hover:bg-pink-900 hover:text-white text-xs sm:text-base'>Delete</button>
+            <Link to={`/admin/offer-cards/edit-cards/${item._id}`}><button  className='border border-pink-900 px-3 py-1 my-2 hover:bg-pink-900 hover:text-white text-xs sm:text-base rounded'>Edit</button></Link>
+            <button onClick={()=>handleDelete(item._id)} className='border border-pink-900 px-3 py-1 my-2 hover:bg-pink-900 hover:text-white text-xs sm:text-base'>Delete</button>
           </div>
          
           </div>

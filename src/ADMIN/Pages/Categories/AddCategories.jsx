@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { errorToast, successToast } from '../../../ExternalComponents/Toast/Toast';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function AddCategories() {
   const [name,setName] = useState('');
   const [description,setDescription] = useState('');
   
+
+  const navigate = useNavigate();
+
 
   const addCategory = async(e) =>{
     e.preventDefault()
@@ -17,6 +21,7 @@ function AddCategories() {
         console.log(response,"gggg");
 
         successToast("Products Added Succesfully")
+        navigate('/admin/categories')
       } catch (error) {
         errorToast(error.message);
       }

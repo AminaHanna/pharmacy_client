@@ -24,7 +24,7 @@ import OrderManagement from './ADMIN/Pages/Orders/OrderManagement'
 import SingleOrders from './ADMIN/Pages/Orders/SingleOrders'
 import OrderSearch from './ADMIN/Pages/Orders/OrderSearch'
 import AdminHome from './ADMIN/Home/AdminHome'
-import AdminProfile from './ADMIN/Pages/Profile.jsx/AdminProfile'
+import AdminProfile from './ADMIN/Pages/Profile/AdminProfile'
 import ProductAdd from './ADMIN/Pages/Products/ProductAdd'
 import Chat from './USER/Chat/Chat'
 import ProductEdit from './ADMIN/Pages/Products/ProductEdit'
@@ -48,12 +48,15 @@ import Blogs from './ADMIN/Pages/Blogs/Blogs'
 import ViewBlogs from './ADMIN/Pages/Blogs/ViewBlogs'
 import EditBlogs from './ADMIN/Pages/Blogs/EditBlogs'
 import AddBlogs from './ADMIN/Pages/Blogs/AddBlogs'
-import UpdateProfile from './ADMIN/Pages/Profile.jsx/UpdateProfile'
+import UpdateProfile from './ADMIN/Pages/Profile/UpdateProfile'
 import Account from './USER/Account/Account'
 import Loadd from './USER/Loading/Loadd'
 import BannerLayout from './ADMIN/Pages/Banner/BannerLayout'
 import BannerPreview from './ADMIN/Pages/Banner/BannerPreview'
-import BannerAdd from './ADMIN/Pages/Banner/BannerAdd'
+import Banner1Add from './ADMIN/Pages/Banner/Banner1/Banner1Add'
+import Banner2Add from './ADMIN/Pages/Banner/Banner2/Banner2Add'
+import Banner3Add from './ADMIN/Pages/Banner/Banner3/Banner3Add'
+import AllNewProducts from './USER/UI/ViewAll/AllNewProducts'
 
 function App() {
   const router = createBrowserRouter ([
@@ -125,6 +128,10 @@ function App() {
           path: "payment",
           element: <Payment/>
         },
+        {
+          path: "new-products",
+          element: <AllNewProducts/>
+        }
       ]
     },
 
@@ -158,9 +165,17 @@ function App() {
               element: <BannerPreview/>
             },
             {
-              path: "banner-add",
-              element: <BannerAdd/>
-            }
+              path: "banner1-add",
+              element: <Banner1Add/>
+            },
+            {
+              path: "banner2-add",
+              element: <Banner2Add/>
+            },
+            {
+              path: "banner3-add",
+              element: <Banner3Add/>
+            },
           ]
         },
         {
@@ -218,7 +233,7 @@ function App() {
               element: <ProductView/>
             },
             {
-              path: "edit-product",
+              path: "edit-product/:id",
               element: <ProductEdit/>
             },
             {
@@ -236,7 +251,7 @@ function App() {
               element:<ViewCategories/>
             },
             {
-              path:"edit-category",
+              path:"edit-category/:id",
               element : <EditCategories/>
             },
             {
@@ -254,7 +269,7 @@ function App() {
               element:<ViewCards/>
             },
             {
-              path:"edit-cards",
+              path:"edit-cards/:id",
               element : <EditCards/>
             },
             {
@@ -272,7 +287,7 @@ function App() {
               element: <ViewBlogs/>
             },
             {
-              path:"edit-blog",
+              path:"edit-blog/:id",
               element : <EditBlogs/>
             },
             {

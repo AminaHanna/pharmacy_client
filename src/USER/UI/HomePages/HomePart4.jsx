@@ -6,6 +6,8 @@ import img3 from "../../../ExternalComponents/Images/tablets.png"
 
 
 function HomePart4() {
+
+    const title_blog = 'In this various aspeaspects of health   '
   return (
     <>
     <p className='text-2xl sm:text-4xl font-medium text-center mt-10'>Our Latest News & Blogs</p>
@@ -23,7 +25,7 @@ function HomePart4() {
                     <p className='sm:font-medium p-1'>24 Dec, 2023</p>
                 </div>
                 <div className="">
-                    <p className='text-lg sm:text-3xl'>In this section, we delve into<br/>various aspects of health</p>
+                    <p className='text-lg sm:text-3xl'>{title_blog.length > 33 ? title_blog.slice(0,33) + '...' : title_blog }</p>
                     <p className='sm:text-base text-xs'>Explore the world of medical specialities through our blog's spotlight<br/>feature.From cardiology to pediatrics, we share in-depth articles written<br/>by our expert physicians.</p>
                     <button className='bg-pink-800 text-xs sm:text-base text-white px-2 py-1 rounded-md mt-2 hover:bg-slate-300'>Read More</button>
                 </div>

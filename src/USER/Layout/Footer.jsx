@@ -18,10 +18,10 @@ function Footer() {
 
           <div className="">
               <p className='sm:text-xl'>Quick Links</p>
-              <Link to={''}><p className='text-xs sm:text-base'>Home</p></Link>
+              <a href="#"><p className='text-xs sm:text-base'>Home</p></a>
               <Link to={''}><p className='text-xs sm:text-base'>About</p></Link>
-              <Link to={''}><p className='text-xs sm:text-base'>Cart</p></Link>
-              <Link to={''}><p className='text-xs sm:text-base'>Orders</p></Link>
+              <Link to={'cart'}><p className='text-xs sm:text-base'>Cart</p></Link>
+              <Link to={'order'}><p className='text-xs sm:text-base'>Orders</p></Link>
           </div>
 
 

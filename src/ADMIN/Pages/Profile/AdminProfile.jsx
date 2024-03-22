@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Avatar } from '@mui/material'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { errorToast } from '../../../ExternalComponents/Toast/Toast';
 
 function AdminProfile() {
 
   const [profile,setProfile] = useState({})
-
   const [refresh,setRefresh] = useState(true)
+
+  
+  const navigate = useNavigate();
+
+  const logout = ()=>{
+      localStorage.removeItem("adminToken")
+      localStorage.removeItem("adminData")
+      navigate('/admin-signup')
+  }
 
   useEffect(()=>{
     fetchAPI()
@@ -37,7 +45,7 @@ function AdminProfile() {
             <p className='text-xs sm:text-base'>Email_id : {profile.adminEmail}</p>
             <Link to={'update'}><button className='text-xs sm:text-base border mt-3 px-3 border-pink-900 rounded hover:bg-pink-900 hover:text-white'>Update</button></Link>
             <p className='text-xs sm:text-base'>Come back later? 
-              <Link to={'/admin-signup'}><button className='text-xs sm:text-base text-pink-900 font-bold'>Logout</button></Link>
+              <button onClick={logout} className='text-xs sm:text-base text-pink-900 font-bold'>Logout</button>
             </p>
         </div>
     </div>

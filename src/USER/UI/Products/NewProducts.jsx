@@ -1,5 +1,6 @@
 import { Card } from '@mui/material'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function NewProducts() {
@@ -31,29 +32,50 @@ function NewProducts() {
         }
     ]
 
+    const [data,setData] = useState([])
+
+    const [productLimit,setProductLimit] = useState(4)
+
+
+    useEffect(()=>{
+      fetchdata()
+    },[])
+
+
+    const fetchdata = async ()=>{
+        try {
+            const response = await axios.get("http://localhost:3000/api/products")
+            setData(response.data.products);
+        } catch (error) {
+            
+        }
+    }
+
   return (
     <>
     <div className="p-5 mx-16 mt-5">
         <h1 className='text-2xl sm:text-4xl font-semibold'>New Products</h1>
     </div>
     <div className="text-right mr-10">
-        <Link to={''}><button className='text-pink-900 sm:text-xl font-mono'>View All <i class="fa-solid fa-arrow-right"></i></button></Link>
+        <Link to={'/new-products'}><button className='text-pink-900 sm:text-xl font-mono'>View All <i class="fa-solid fa-arrow-right"></i></button></Link>
     </div>
     
     {/* New Products start */}
     
     <div className="flex flex-wrap justify-center">
             {
-                NewProducts.map((item)=>{
+                data.map((item,index)=>{
                     return(
                         <>
-                        <Card className='border w-[130px] sm:w-[250px] h-fit m-5'>
-                            <Link to={`/products/${item.prdct_id}`}>
-                                <div className="bg-slate-500">
-                                    <img className='' src={item.image} alt="Loading..." />
+                        
+                        {index < productLimit &&
+                        <Card className='border w-[130px] sm:w-[250px] sm:h-[350px] m-5 flex flex-col justify-between'>
+                            <Link to={`/products/${item._id}`} state={item} >
+                                <div className="h-[130px] sm:h-[240px]">
+                                    <img className='h-full w-full' src={item.mainImage} alt="Loading..." />
                                 </div>
-                                <div className="border p-2">
-                                    <p className='text-xs sm:text-xl font-bold'>{item.prdctName}</p>
+                                <div className="border-t-2 p-2">
+                                    <p className='text-xs sm:text-xl font-bold'>{item.name}</p>
                                     <p className='text-xs sm:text-base'>{item.price}</p>
                                 </div>
                             </Link>
@@ -61,10 +83,12 @@ function NewProducts() {
                                 <button className='bg-pink-900 text-white text-xs sm:text-base rounded w-full py-2'>Add to Cart <i class="fa-solid fa-bag-shopping"></i></button>
                             </div>
                         </Card>
+                }
                         </>
                     )
                 })
             }
+            
         </div>
 
     {/* New Products end */}

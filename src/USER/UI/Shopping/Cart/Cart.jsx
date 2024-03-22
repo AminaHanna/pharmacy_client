@@ -1,6 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Card } from "@mui/material"
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Card } from "@mui/material";
+import axios from 'axios';
+import EmptyCart from './EmptyCart';
 
 function Cart() {
 
@@ -21,9 +23,72 @@ function Cart() {
   ]
 
 
+  const [data,setData] = useState([])
+
+  const [productLimit,setProductLimit] = useState(4)
+  const [refresh,setRefresh] = useState(true)
+
+
+  useEffect(()=>{
+    fetchdata()
+  },[refresh])
+
+
+  const fetchdata = async ()=>{
+      try {
+          const response = await axios.get(`http://localhost:3000/api/cart/listCart/${JSON.parse(localStorage.getItem("users"))._id}`)
+          // console.log(response.data,"ttt");
+          setData(response.data.data);
+          // setData(response.data.data);
+      } catch (error) {
+        setData([]);
+
+          console.log(error);
+      }
+  }
+
+  const handleIncrementQuantity = async(id)=>{
+      try {
+        const response = await axios.post(`http://localhost:3000/api/cart/increment-cart/${JSON.parse(localStorage.getItem("users"))._id}/${id}`)
+        // console.log(response.data,"ttt");
+        // setData(response.data.data);
+        // setData(response.data.data);
+        setRefresh(!refresh)
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
+  const handleDescrementQuantity = async(id)=>{
+    try {
+      const response = await axios.get(`http://localhost:3000/api/cart/decrement-cart/${JSON.parse(localStorage.getItem("users"))._id}/${id}`)
+      // console.log(response.data,"ttt");
+      // setData(response.data.data);
+      // setData(response.data.data);
+      setRefresh(!refresh)
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+const handleRemoveQuantity = async(id)=>{
+  try {
+    const response = await axios.get(`http://localhost:3000/api/cart/remove-cart/${JSON.parse(localStorage.getItem("users"))._id}/${id}`)
+    // console.log(response.data,"ttt");
+    // setData(response.data.data);
+    // setData(response.data.data);
+    setRefresh(!refresh)
+
+} catch (error) {
+    console.log(error);
+}
+}
+
+
+
   return (
     <>
-    <div className="flex flex-wrap justify-center">
+   { data?.length > 0 ?  <div className="flex flex-wrap justify-center">
       {/* cart details */}
         <div className="bg-slate-100 m-5 p-5 rounded-lg w-[350px] sm:w-[700px]">
           <div className="flex justify-between">
@@ -32,22 +97,24 @@ function Cart() {
           </div>
           <div className="m-3 flex flex-wrap">
             {
-              cart.map((item)=>{
+              data.map((item)=>{
                 return(
                   <>
                   <Card className='w-[300px] m-2'>
                     <div className="flex">
-                      <img src={item.image} alt="" className='w-[100px] m-2'/>
+                      <img src={item.productInfo.mainImage} alt="" className='w-[100px] m-2'/>
                       <div className="mt-3">
-                        <p>{item.prdctName}</p>
+                        <p>{item.productInfo.name}</p>
                         <div className="mt-3 flex justify-between p-3 gap-5 ">
-                          <p className='font-bold text-xs sm:text-base'>{item.price}</p>
+                          <p className='font-bold text-xs sm:text-base'>{item.productInfo.price}</p>
                           <p className='border px-3 flex gap-3'>
-                            <button className='text-lg'>-</button>
-                            <button className='font-bold text-xs sm:text-base'>0</button>
-                            <button>+</button>
+                            <button className='text-lg' onClick={()=>handleDescrementQuantity(item.productInfo._id)} >-</button>
+                            <button className='font-bold text-xs sm:text-base'>{item.quantity}</button>
+                            <button onClick={()=>handleIncrementQuantity(item.productInfo._id)}>+</button>
                           </p>
+
                         </div>
+                          <button className='hover:underline' onClick={()=>handleRemoveQuantity(item.productInfo._id)}>delete</button>
                       </div>
                     </div>
                   </Card>
@@ -84,6 +151,11 @@ function Cart() {
         </div>
 
     </div>
+    
+  :
+
+  <EmptyCart/>
+  }
     </>
   )
 }
