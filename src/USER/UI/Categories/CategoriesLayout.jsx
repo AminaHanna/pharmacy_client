@@ -1,14 +1,15 @@
 import { Card } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { errorToast } from "../../../ExternalComponents/Toast/Toast";
+import { errorToast, successToast } from "../../../ExternalComponents/Toast/Toast";
 import axios from "axios";
+import { ContextAPI } from "../Context/Context";
 
 function CategoriesLayout() {
   const { page } = useParams();
-  // console.log(page);
-
   const [products, setProducts] = useState([]);
+  const {refresh,setRefresh} = React.useContext(ContextAPI);
+
 
   useEffect(() => {
     fetchAPI();
@@ -30,12 +31,26 @@ function CategoriesLayout() {
     } catch (error) {
       errorToast(error.message);
     }
-
     console.log(products, "products");
   };
+
+
+  const addToCart = async (id) => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/cart/addToCart',  {productId:id,userId:JSON.parse(localStorage.getItem("users"))?._id} );
+      console.log(response);
+      setRefresh(!refresh)
+      successToast("Succesfully Added into Cart")
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
   return (
     <>
-      {page}
+      {/* {page} */}
       <div className="flex flex-wrap justify-center">
       {products.map((item) => {
         return (
@@ -51,7 +66,11 @@ function CategoriesLayout() {
                 </div>
               </Link>
               <div className="">
-                <button className="bg-pink-900 text-white text-xs sm:text-base rounded w-full py-2">
+                <button type='button' 
+                    onClick={()=>{
+                        addToCart(item._id)
+                    }}
+                    className="bg-pink-900 text-white text-xs sm:text-base rounded w-full py-2">
                   Add to Cart <i class="fa-solid fa-bag-shopping"></i>
                 </button>
               </div>

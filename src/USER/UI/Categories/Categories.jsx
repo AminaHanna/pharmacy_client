@@ -38,11 +38,11 @@ function Categories() {
 
         <div className="hidden sm:flex flex-wrap justify-center gap-5 m-auto w-[full]">
 
-        { categories && categories.map((item,i)=>{
+        { categories && categories.map((item)=>{
                 return(
                 <> 
                 <Link to={`/shopping/${item._id}` } className='hover:bg-slate-100 p-2 rounded-lg'>
-                      <p>{item.name}</p>
+                    <p>{item.name}</p>
                 </Link>
                 </>
                 )

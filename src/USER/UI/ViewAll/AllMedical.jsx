@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function AllNewProducts() {
+function AllMedical() {
 
     const [data,setData] = useState([])
 
@@ -49,4 +49,4 @@ function AllNewProducts() {
   )
 }
 
-export default AllNewProducts;
+export default AllMedical;

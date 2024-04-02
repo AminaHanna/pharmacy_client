@@ -7,20 +7,6 @@ function ViewCategories() {
   const [ category, setCategory ] = useState([]);
   const [ refresh, setRefresh ]  = useState(true);
 
-  // const categories = [
-  //   {
-  //     category_name: "Category 1",
-  //     cate_description: "description about it......"
-  //   },
-  //   {
-  //     category_name: "Category 2",
-  //     cate_description: "description about it......"
-  //   },
-  //   {
-  //     category_name: "Category 3",
-  //     cate_description: "description about it......"
-  //   }
-  // ]
 
 
   useEffect(()=>{
@@ -62,7 +48,7 @@ const handleDelete = async(id) =>{
         category.map((item)=>{
           return(
           <>
-          <div className="flex flex-col justify-between items-center bg-pink-50 m-5 p-5 w-[150px] sm:w-[200px] h-[150px] sm:h-[200px] border border-pink-900 shadow-md shadow-pink-900 rounded-lg">
+          <div className="flex flex-col justify-between items-center m-5 p-5 w-[150px] sm:w-[200px] h-[150px] sm:h-[200px] border border-pink-900 shadow-md shadow-pink-900 rounded-lg">
 
           <div className="">
             <p className='text-base sm:text-lg'>{item.name}</p>

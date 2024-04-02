@@ -1,45 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Card } from "@mui/material";
 import axios from 'axios';
 import EmptyCart from './EmptyCart';
+import  { ContextAPI } from '../../Context/Context';
 
 function Cart() {
+  const [data,setData] = useState([]);
+  const {carts,refresh,setRefresh} = React.useContext(ContextAPI)
 
-
-  const cart = [
-    {
-      image:"https://png.pngtree.com/png-clipart/20230801/original/pngtree-urinary-cathetericon-color-flat-catheter-picture-image_7813016.png",
-      prdctName:"Foley Catheter",
-      price:"$12.90",
-      prdct_id:"",
-    },
-    {
-      image:"https://png.pngtree.com/png-clipart/20230801/original/pngtree-urinary-cathetericon-color-flat-catheter-picture-image_7813016.png",
-      prdctName:"Foley Catheter",
-      price:"$12.90",
-      prdct_id:"",
-    }
-  ]
-
-
-  const [data,setData] = useState([])
-
-  const [productLimit,setProductLimit] = useState(4)
-  const [refresh,setRefresh] = useState(true)
+  const { state } = useLocation();
+  const item = state;
 
 
   useEffect(()=>{
-    fetchdata()
+    fetchdata();
   },[refresh])
 
 
   const fetchdata = async ()=>{
       try {
           const response = await axios.get(`http://localhost:3000/api/cart/listCart/${JSON.parse(localStorage.getItem("users"))._id}`)
-          // console.log(response.data,"ttt");
+        
           setData(response.data.data);
-          // setData(response.data.data);
       } catch (error) {
         setData([]);
 
@@ -50,21 +33,17 @@ function Cart() {
   const handleIncrementQuantity = async(id)=>{
       try {
         const response = await axios.post(`http://localhost:3000/api/cart/increment-cart/${JSON.parse(localStorage.getItem("users"))._id}/${id}`)
-        // console.log(response.data,"ttt");
-        // setData(response.data.data);
-        // setData(response.data.data);
+        
         setRefresh(!refresh)
     } catch (error) {
         console.log(error);
     }
   }
 
-  const handleDescrementQuantity = async(id)=>{
+  const handleDecrementQuantity = async(id)=>{
     try {
       const response = await axios.get(`http://localhost:3000/api/cart/decrement-cart/${JSON.parse(localStorage.getItem("users"))._id}/${id}`)
-      // console.log(response.data,"ttt");
-      // setData(response.data.data);
-      // setData(response.data.data);
+    
       setRefresh(!refresh)
   } catch (error) {
       console.log(error);
@@ -74,30 +53,31 @@ function Cart() {
 const handleRemoveQuantity = async(id)=>{
   try {
     const response = await axios.get(`http://localhost:3000/api/cart/remove-cart/${JSON.parse(localStorage.getItem("users"))._id}/${id}`)
-    // console.log(response.data,"ttt");
-    // setData(response.data.data);
-    // setData(response.data.data);
+   
     setRefresh(!refresh)
 
-} catch (error) {
-    console.log(error);
-}
+  } catch (error) {
+      console.log(error);
+  }
 }
 
-
+let totalAmount = 0;
 
   return (
     <>
-   { data?.length > 0 ?  <div className="flex flex-wrap justify-center">
+   { carts?.length > 0 ?  
+   <div className="flex flex-wrap justify-center">
       {/* cart details */}
         <div className="bg-slate-100 m-5 p-5 rounded-lg w-[350px] sm:w-[700px]">
           <div className="flex justify-between">
             <p className='font-bold text-lg'>Shopping Cart</p>
-            <p className='font-bold'>2 items</p>
+            <p className='font-bold'>{carts.length} Items</p>
           </div>
           <div className="m-3 flex flex-wrap">
             {
               data.map((item)=>{
+                console.log(totalAmount, 'total');
+                totalAmount = totalAmount + (item.productInfo.price * item.quantity)
                 return(
                   <>
                   <Card className='w-[300px] m-2'>
@@ -108,7 +88,7 @@ const handleRemoveQuantity = async(id)=>{
                         <div className="mt-3 flex justify-between p-3 gap-5 ">
                           <p className='font-bold text-xs sm:text-base'>{item.productInfo.price}</p>
                           <p className='border px-3 flex gap-3'>
-                            <button className='text-lg' onClick={()=>handleDescrementQuantity(item.productInfo._id)} >-</button>
+                            <button className={`font-bold text-lg ${item.quantity === 1 ? 'cursor-not-allowed' : 'cursor-pointer'} `} onClick={()=>handleDecrementQuantity(item.productInfo._id)} >-</button>
                             <button className='font-bold text-xs sm:text-base'>{item.quantity}</button>
                             <button onClick={()=>handleIncrementQuantity(item.productInfo._id)}>+</button>
                           </p>
@@ -123,17 +103,20 @@ const handleRemoveQuantity = async(id)=>{
               })
             }
 
-            {/* <button className='text-pink-900 mt-3'><i class="fa-solid fa-arrow-left"></i> Continue Shopping</button> */}
+            <Link to={'/'}>
+              <button className='text-pink-900 mt-3'><i class="fa-solid fa-arrow-left"></i> Continue Shopping</button>
+            </Link>
           </div>
         </div>
 
         {/* cart summary */}
         <div className="bg-pink-50 m-5 p-5 rounded-lg w-[300px] sm:w-[400px]">
           <p className='font-bold text-lg p-5'>Order Summary</p>
-          <p className='font-bold p-2'>ITEMS 2</p>
+          <p className='font-bold p-2'>{carts.length} ITEMS</p>
           <div className="flex justify-between p-2">
             <p className='font-bold text-xs sm:text-base'>Subtotal</p>
-            <p className='font-bold text-xs sm:text-base'>sub_price</p>
+            <p className='font-bold text-xs sm:text-base'>{totalAmount}</p>
+            {console.log(totalAmount, 'ttt')}
           </div>
           <div className="flex justify-between p-2">
             <p className='font-bold text-xs sm:text-base'>Tax</p>
@@ -145,9 +128,13 @@ const handleRemoveQuantity = async(id)=>{
           </div>
           <div className="flex justify-between p-2 border-t-2 mt-5">
             <p className='font-bold text-xs sm:text-base'>Estimated Total</p>
-            <p className='font-bold text-xs sm:text-base'>total</p>
+            <p className='font-bold text-xs sm:text-base'>{totalAmount}</p>
           </div>
-            <Link to={'/shipping-address'}><button className='bg-pink-900 hover:bg-pink-700 text-white rounded-md px-5 py-2 m-16 text-xs sm:text-base'>PLACE ORDER</button></Link>
+            <Link to={'/shipping-addresss'}>
+              <button className='bg-pink-900 hover:bg-pink-700 text-white rounded-md px-5 py-2 m-16 text-xs sm:text-base'>
+                PLACE ORDER
+              </button>
+            </Link>
         </div>
 
     </div>
@@ -160,4 +147,4 @@ const handleRemoveQuantity = async(id)=>{
   )
 }
 
-export default Cart
+export default Cart;

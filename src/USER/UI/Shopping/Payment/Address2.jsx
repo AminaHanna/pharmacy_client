@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from "axios";
 import { errorToast, successToast } from '../../../../ExternalComponents/Toast/Toast';
 
-function Address() {
+function Address2() {
     const [ name,setName ] = useState('');
     const [ address,setAddress ] = useState('');
     const [ contact,setContact ] = useState('');
@@ -18,7 +18,7 @@ function Address() {
     const addAddress = async(e) =>{
       e.preventDefault()
       try {
-          const response = await axios.post("http://localhost:3000/api/order",{name,address,contact,city,pincode,mode:mode,userId:JSON.parse(localStorage.getItem("users"))._id,productId:id},{headers:{
+          const response = await axios.post("http://localhost:3000/api/order",{name,address,contact,city,pincode,mode:mode,type:"cart",userId:JSON.parse(localStorage.getItem("users"))._id,productId:id,cartId:id},{headers:{
             'Authorization':`Bearer ${localStorage.getItem("token")}`
           }})
           
@@ -143,17 +143,8 @@ function Address() {
 
         </div>
     </div>
-
-
-    <RenderRazorpay
-    amount={orderDetails.amount}
-    currency={orderDetails.currency}
-    orderId={orderDetails.orderId}
-    keyId={process.env.REACT_APP_RAZORPAY_KEY_ID}
-    keySecret={process.env.REACT_APP_RAZORPAY_KEY_SECRET}
-  />
     </>
   )
 }
 
-export default Address
+export default Address2;

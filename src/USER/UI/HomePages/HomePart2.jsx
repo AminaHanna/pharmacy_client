@@ -1,8 +1,5 @@
 import { Card } from '@mui/material'
 import React from 'react'
-import image1 from "../../../ExternalComponents/Images/black-garlic-oil.png"
-import image2 from "../../../ExternalComponents/Images/yellowtoothpaste.png"
-import image3 from "../../../ExternalComponents/Images/charcoaltoothpaste.png"
 import { Link } from 'react-router-dom'
 import UserBanner1 from '../Banners/UserBanner1'
 import UserBanner2 from '../Banners/UserBanner2'

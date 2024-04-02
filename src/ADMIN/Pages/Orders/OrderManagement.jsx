@@ -1,58 +1,50 @@
-import { Avatar, Card } from '@mui/material'
-import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Avatar } from '@mui/material'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { errorToast, successToast } from '../../../ExternalComponents/Toast/Toast';
+import { Link } from 'react-router-dom';
 
 function OrderManagement() {
 
-    const OrderManagement = [
-        {
-            orderId:"orderid 1",
-            Date:"date",
-            UserName:"user name",
-            Status:"completed"
-        },
-        {
-            orderId:"orderid 2",
-            Date:"date",
-            UserName:"user name",
-            Status:"processing"
-        },
-        {
-            orderId:"orderid 3",
-            Date:"date",
-            UserName:"user name",
-            Status:"new order"
-        },
-    ]
+    const [users,setUsers] = useState([]);
 
+    useEffect(()=>{
+      fetchUsers()
+    },[])
+  
+    const fetchUsers=async()=>{
+      try {
+        const response = await axios.get("http://localhost:3000/api/user")
+         console.log(response,"responseee");    
+        setUsers(response.data.users)      
+      } catch (error) {
+        errorToast(error.message || 'error')
+      }
+    }
+
+
+   
   return (
     <>
     <div className="">
-
-
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center gap-5 m-5">
             {
-                OrderManagement.map((item)=>{
+                users.map((item)=>{
                     return(
-                        <>
-                        <Card className="w-[180px] sm:w-[250px] m-5 p-2">
-                                <div className="flex justify-between">
-                                    <div className="">
-                                        <p className='text-xs sm:text-base text-slate-500 font-thin'>{item.orderId}</p>
-                                        <p className='text-xs sm:text-base'>{item.Date}</p>
-                                        <p className='text-xs sm:text-base font-medium'>{item.UserName}</p>
-                                        <p className='text-xs sm:text-base text-slate-500'>Status:{item.Status}</p>
-                                    </div>
-                                    <div className="m-5">
-                                        <Avatar className=''/>
-                                    </div>
-                                </div>
-                            <Link to={'/admin/single-orders'} >
-                                <button className='mt-2 px-2 border border-pink-900'>check</button>
-                            </Link>
-                        </Card>
-                        
-                        </>
+                      <>
+                        <div className="p-5 border border-pink-900 rounded-xl shadow-md w-[150px] sm:w-[200px]">
+                            <Avatar/>
+                            <p className='text-xs my-2 text-slate-600'>{item._id}</p>
+                            <p className='text-xs sm:text-base font-semibold'>{item.userFname} {item.userLname}</p>
+                            <p className='text-xs sm:text-base font-semibold'>{item.userEmail}</p>
+                          
+                          <div className="flex gap-2 justify-center flex-wrap mt-3">
+                          <Link to={`/admin/orders/user/${item._id}`}>
+                            <button className='border border-pink-900 px-2 rounded-lg hover:text-white hover:bg-pink-900'>Check</button>
+                          </Link>
+                          </div>
+                        </div>
+                      </>
                     )
                 })
             }

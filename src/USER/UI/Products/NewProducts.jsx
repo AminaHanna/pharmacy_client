@@ -2,39 +2,13 @@ import { Card } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ContextAPI } from '../Context/Context'
+import { successToast } from '../../../ExternalComponents/Toast/Toast'
 
 function NewProducts() {
-
-    const NewProducts = [
-        {
-            image:"https://png.pngtree.com/png-clipart/20230801/original/pngtree-urinary-cathetericon-color-flat-catheter-picture-image_7813016.png",
-            prdctName:"Foley Catheter",
-            price:"$12.90",
-            prdct_id:"1st prdct"
-        },
-        {
-            image:"https://img.lovepik.com/free-png/20211216/lovepik-hand-drawn-thermometer-png-image_401695408_wh1200.png",
-            prdctName:"Thermometer",
-            price:"$8.90",
-            prdct_id:"2nd prdct"
-        },
-        {
-            image:"https://www.oxyaider.co.za/wp-content/uploads/2021/11/Made-of-medical-grade-PVC-.-1.png",
-            prdctName:"Mask",
-            price:"$12.90",
-            prdct_id:"3rd prdct"
-        },
-        {
-            image:"https://static.vecteezy.com/system/resources/previews/024/286/063/non_2x/wound-dressing-plaster-free-png.png",
-            prdctName:"Wound Dressing",
-            price:"$24.90",
-            prdct_id:"4th prdct"
-        }
-    ]
-
     const [data,setData] = useState([])
-
     const [productLimit,setProductLimit] = useState(4)
+    const {refresh,setRefresh} = React.useContext(ContextAPI);
 
 
     useEffect(()=>{
@@ -46,10 +20,22 @@ function NewProducts() {
         try {
             const response = await axios.get("http://localhost:3000/api/products")
             setData(response.data.products);
+            console.log(response,"kkk");
         } catch (error) {
             
         }
     }
+
+    const addToCart = async (id) => {
+        try {
+          const response = await axios.post('http://localhost:3000/api/cart/addToCart',  {productId:id,userId:JSON.parse(localStorage.getItem("users"))?._id} );
+          console.log(response);
+          setRefresh(!refresh)
+          successToast("Succesfully Added into Cart")
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
   return (
     <>
@@ -69,7 +55,7 @@ function NewProducts() {
                         <>
                         
                         {index < productLimit &&
-                        <Card className='border w-[130px] sm:w-[250px] sm:h-[350px] m-5 flex flex-col justify-between'>
+                        <Card className='border w-[130px] sm:w-[250px] sm:h-[350px] m-5'>
                             <Link to={`/products/${item._id}`} state={item} >
                                 <div className="h-[130px] sm:h-[240px]">
                                     <img className='h-full w-full' src={item.mainImage} alt="Loading..." />
@@ -80,10 +66,14 @@ function NewProducts() {
                                 </div>
                             </Link>
                             <div className="">
-                                <button className='bg-pink-900 text-white text-xs sm:text-base rounded w-full py-2'>Add to Cart <i class="fa-solid fa-bag-shopping"></i></button>
+                                <button type='button' 
+                                    onClick={()=>{
+                                        addToCart(item._id)
+                                    }} 
+                                className='bg-pink-900 text-white text-xs sm:text-base rounded w-full py-2'>Add to Cart <i class="fa-solid fa-bag-shopping"></i></button>
                             </div>
                         </Card>
-                }
+                        }
                         </>
                     )
                 })

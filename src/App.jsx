@@ -57,6 +57,19 @@ import Banner1Add from './ADMIN/Pages/Banner/Banner1/Banner1Add'
 import Banner2Add from './ADMIN/Pages/Banner/Banner2/Banner2Add'
 import Banner3Add from './ADMIN/Pages/Banner/Banner3/Banner3Add'
 import AllNewProducts from './USER/UI/ViewAll/AllNewProducts'
+import AllPopular from './USER/UI/ViewAll/AllPopular'
+import AllTop from './USER/UI/ViewAll/AllTop'
+import AllMedical from './USER/UI/ViewAll/AllMedical'
+import AllUpcoming from './USER/UI/ViewAll/AllUpcoming'
+import HomePage4_1More from './USER/UI/HomePages/Home4/HomePage4More'
+import HomePage4_2More from './USER/UI/HomePages/Home4/HomePage4_2More'
+import HomePage4_3More from './USER/UI/HomePages/Home4/HomePage4_3More'
+import HomePage4_4More from './USER/UI/HomePages/Home4/HomePage4_4More'
+import Succesfull from './USER/UI/Shopping/Payment/Succesfull'
+import UserOrders from './ADMIN/Pages/Orders/OrdersOfUsers'
+import Address2 from './USER/UI/Shopping/Payment/Address2'
+
+
 
 function App() {
   const router = createBrowserRouter ([
@@ -64,10 +77,10 @@ function App() {
       path: "/",
       element: <UserLayout/>,
       children: [
-        {
-          path:"",
-          element: <Loadd/>
-        },
+        // {
+        //   path:"",
+        //   element: <Loadd/>
+        // },
         {
           path: "",
           element: <UserHome/>
@@ -121,20 +134,62 @@ function App() {
           element: <EmptyOrders/>
         },
         {
-          path: "shipping-address",
+          path: "shipping-address/:id",
           element: <Address/>
         },
+        {
+          path: "shipping-addresss",
+          element: <Address2/>
+        },  
         {
           path: "payment",
           element: <Payment/>
         },
         {
+          path: "successfull",
+          element: <Succesfull/>
+        },
+        {
           path: "new-products",
           element: <AllNewProducts/>
+        },
+        {
+          path: "popular-products",
+          element: <AllPopular/>
+        },
+        {
+          path: "top-products",
+          element: <AllTop/>
+        },
+        {
+          path: "medical-products",
+          element: <AllMedical/>
+        },
+        {
+          path: "upcoming-products",
+          element: <AllUpcoming/>
+        },
+        {
+          path:"read1more",
+          element: <HomePage4_1More/>
+        },
+        {
+          path:"read2more",
+          element: <HomePage4_2More/>
+        },
+        {
+          path:"read3more",
+          element: <HomePage4_3More/>
+        },
+        {
+          path:"read4more",
+          element: <HomePage4_4More/>
         }
       ]
     },
 
+    
+   
     
 
 
@@ -193,6 +248,10 @@ function App() {
             {
               path: "",
               element: <OrderManagement/>
+            },
+            {
+              path: "user/:id",
+              element: <UserOrders/>
             },
             {
               path: "all",

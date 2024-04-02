@@ -22,36 +22,51 @@ function Dropdown() {
       </button>
 
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div className="origin-top-right absolute right-0 mt-2 w-32 sm:w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           <div className="py-1">
             <Link to={'account'}
               className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
             >
-              My Account
+              <p className='flex gap-1 sm:gap-2'>
+                <span><i class="fa-solid fa-user"></i></span>
+                <span>My Account</span>
+              </p>
             </Link>
 
             <Link to={''}
               className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
             >
-              Home
+              <p className='flex gap-1 sm:gap-2'>
+                <span><i class="fa-solid fa-house"></i></span>
+                <span> Home</span>
+              </p>
             </Link>
 
             <Link to={'order'}
               className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
             >
-              My Orders
+              <p className='flex gap-1 sm:gap-2'>
+                <span><i class="fa-solid fa-bag-shopping"></i></span>
+                <span> My Orders</span>
+              </p>
             </Link>
 
             <Link to={'cart'}
               className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
             >
-              Cart
+              <p className='flex gap-1 sm:gap-2'>
+                <span><i class="fa-solid fa-cart-shopping"></i></span>
+                <span> Cart</span>
+              </p>
             </Link>
 
             <Link to={'wishlist'}
               className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
             >
-              Wishlist
+              <p className='flex gap-1 sm:gap-2'>
+                <span><i class="fa-solid fa-heart"></i></span>
+                <span> Wishlist</span>
+              </p>
             </Link>
 
             <Link to={'/admin'}
@@ -61,7 +76,7 @@ function Dropdown() {
             </Link>
 
             <Link to={'/user-signup'}
-              className="block px-4 py-2 text-sm text-pink-900 hover:bg-gray-100"
+              className="block px-4 py-2 text-sm text-white bg-pink-900 hover:bg-gray-100 hover:text-pink-900"
             >
               Logout
             </Link>

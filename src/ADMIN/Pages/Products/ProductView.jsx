@@ -53,7 +53,7 @@ function ProductView() {
             setProduct(response.data.products)
           } catch (error) {
 
-            // catchnte ulli products null aakki kodthaal delete aakkmbo last product remove aayi poovm..illenki refresh mele cheyynm
+            // catchnte ullil products null aakki kodthaal delete aakkmbo last product remove aayi poovm..illenki refresh mele cheyynm
             setProduct([])
             errorToast(error.message)
           }
@@ -109,10 +109,11 @@ function ProductView() {
             <div className="m-5">
 
               <div className="mt-3">
-                <p className='text-xs sm:text-base'>category :{item.categoriesInfo.name}</p>
                 <p className='text-xs sm:text-base'>name :{item.name}</p>
                 <p className='text-xs sm:text-base'>price : {item.price}</p>
+                <p className='text-xs sm:text-base'>category :{item.categoriesInfo.name}</p>
                 <p className='text-xs sm:text-base'>Details : {item.details}</p>
+                <p className='text-xs sm:text-base'>Quantity : {item.quantity}</p>
                 <p className='text-xs sm:text-base'>Delivery charge : {item.delivery}</p>
               </div>
 

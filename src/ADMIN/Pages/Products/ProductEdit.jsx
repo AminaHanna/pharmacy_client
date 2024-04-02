@@ -13,6 +13,8 @@ function ProductEdit() {
   const [delivery,setDelivery] = useState('');
   const [categories,setCategories] = useState([]);
   const [ dropdown,setDropdown ] = useState('');
+  const [ quantity,setQuantity ] = useState('');
+
 
   const {id} = useParams();
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ function ProductEdit() {
   const editProduct = async(e) =>{
     e.preventDefault()
     try {
-        const response = await axios.put(`http://localhost:3000/api/products/${id}`,{mainImage:mainImage,image:image,name:name,price:price,details:details,delivery:delivery,dropdown},
+        const response = await axios.put(`http://localhost:3000/api/products/${id}`,{mainImage:mainImage,image:image,name:name,price:price,details:details,quantity,delivery:delivery,dropdown},
         {
           headers:{
           'Authorization':`Bearer ${localStorage.getItem("adminToken")}`
@@ -53,7 +55,7 @@ function ProductEdit() {
     setDetails(value.state.details)
     setDelivery(value.state.delivery)
     setCategories(value.state.categories)
-    
+    setQuantity(value.state.quantity)
     fetchAPI()
   },[])
 
@@ -108,11 +110,11 @@ function ProductEdit() {
             <div className="flex flex-col w-[200px] gap-3 m-auto mt-3">
 
             <select name="" id="" onChange={(e)=> setDropdown(e.target.value) }>
+              <option>Select</option>
               { 
                 categories && categories.map((item)=>{
                 return(
                   <>
-                  <option>Select</option>
                   <option key={item._id} value={item._id}>{item.name}</option>
                   </>
                 )
@@ -123,6 +125,7 @@ function ProductEdit() {
                 <input type="text" placeholder='name' value={name} onChange={(e)=>setName(e.target.value)} className='outline outline-1 text-xs sm:text-base rounded px-2' />
                 <input type="text" placeholder='price' value={price} onChange={(e)=>setPrice(e.target.value)}  className='outline outline-1 text-xs sm:text-base rounded px-2' />
                 <input type="text" placeholder='details' value={details} onChange={(e)=>setDetails(e.target.value)} className='outline outline-1 text-xs sm:text-base rounded px-2' />
+                <input type="text" placeholder='quantity' value={quantity} onChange={(e)=>setQuantity(e.target.value)} className='outline outline-1 text-xs sm:text-base rounded px-2' />
                 <input type="text" placeholder='delivery cost' value={delivery} onChange={(e)=>setDelivery(e.target.value)} className='outline outline-1 text-xs sm:text-base rounded px-2' />
                 <input type="submit" value="submit"  className='text-pink-900 border-pink-900 border text-xs sm:text-base hover:bg-pink-900 hover:text-white'/>
             </div>
