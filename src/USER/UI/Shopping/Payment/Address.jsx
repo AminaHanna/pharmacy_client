@@ -2,8 +2,19 @@ import React, { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from "axios";
 import { errorToast, successToast } from '../../../../ExternalComponents/Toast/Toast';
+import RenderRazorpay from './RenderRazorpay';
+
 
 function Address() {
+  const [orderDetails, setOrderDetails] = useState({
+    orderId: null,
+    currency: null,
+    amount: null,
+   });
+   const [displayRazorpay, setDisplayRazorpay] = useState(false);
+
+
+
     const [ name,setName ] = useState('');
     const [ address,setAddress ] = useState('');
     const [ contact,setContact ] = useState('');
@@ -24,12 +35,22 @@ function Address() {
           
           console.log(response,"aaa");
 
+          setOrderDetails({
+            orderId: response.order_id,
+            currency: response.currency,
+            amount: response.amount,
+          });
+          setDisplayRazorpay(true);
+
           successToast("Address Added Succesfully");
-          navigate('/successfull');
+          // navigate('/successfull');
         } catch (error) {
           errorToast(error.message);
         }
   }
+
+
+  
 
 
   return (
@@ -145,13 +166,15 @@ function Address() {
     </div>
 
 
+    {displayRazorpay && (
     <RenderRazorpay
-    amount={orderDetails.amount}
-    currency={orderDetails.currency}
-    orderId={orderDetails.orderId}
-    keyId={process.env.REACT_APP_RAZORPAY_KEY_ID}
-    keySecret={process.env.REACT_APP_RAZORPAY_KEY_SECRET}
-  />
+      amount={orderDetails.amount}
+      currency={orderDetails.currency}
+      orderId={orderDetails.orderId}
+      keyId='rzp_test_IYYjwzy1ucmvkA'
+      keySecret='mpg2uvMb65GlFIIvkHOdR4nb'
+    />
+    )}
     </>
   )
 }
