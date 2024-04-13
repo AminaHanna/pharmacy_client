@@ -25,7 +25,7 @@ function Address2() {
           console.log(response,"aaa");
 
           successToast("Address Added Succesfully");
-          navigate('/successfull');
+          // navigate('/successfull');
         } catch (error) {
           errorToast(error.message);
         }

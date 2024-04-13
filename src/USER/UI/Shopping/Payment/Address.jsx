@@ -35,12 +35,16 @@ function Address() {
           
           console.log(response,"aaa");
 
+          if(mode === 'online'){
+
           setOrderDetails({
             orderId: response.order_id,
             currency: response.currency,
             amount: response.amount,
           });
           setDisplayRazorpay(true);
+
+          }
 
           successToast("Address Added Succesfully");
           // navigate('/successfull');

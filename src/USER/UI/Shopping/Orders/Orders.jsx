@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from "@mui/material"
+import axios from 'axios';
 
 function Orders() {
 
-  const cart = [
-    {
-      image:"https://png.pngtree.com/png-clipart/20230801/original/pngtree-urinary-cathetericon-color-flat-catheter-picture-image_7813016.png",
-      prdctName:"Foley Catheter",
-      price:"$12.90",
-      prdct_id:"",
-    },
-    {
-      image:"https://png.pngtree.com/png-clipart/20230801/original/pngtree-urinary-cathetericon-color-flat-catheter-picture-image_7813016.png",
-      prdctName:"Foley Catheter",
-      price:"$12.90",
-      prdct_id:"",
-    }
-  ]
+ 
+  const [data,setData] = useState([]);
+  useEffect(()=>{
+    fetchdata();
+  },[])
+
+
+  const fetchdata = async ()=>{
+      try {
+          const response = await axios.get(`http://localhost:3000/api/cart/listCart/${JSON.parse(localStorage.getItem("users"))._id}`)
+        
+          setData(response.data.data);
+      } catch (error) {
+        setData([]);
+
+          console.log(error);
+      }
+  }
 
   return (
     <>
@@ -28,10 +33,10 @@ function Orders() {
           <div className="flex flex-wrap my-5 gap-5">
       
             {
-              cart.map((item)=>{
+              data.map((item)=>{
                 return(
-                  <>
-                    <Card className='w-[350px] p-2'>
+                  <div key={item._id} className='flex gap-5 border px-3 py-4 shadow-md'>
+                    {/* <Card className='w-[350px] p-2'>
                       <div className="flex justify-between m-2">
                         <div className="">
                           <p className='text-xs sm:text-base'>Date</p>
@@ -51,8 +56,12 @@ function Orders() {
                         <button className='text-pink-900 border border-pink-900 p-1 rounded-md text-xs sm:text-base hover:bg-pink-900 hover:text-white'>View Details</button>
                         <button className='bg-pink-800 text-white p-1 rounded-md text-xs sm:text-base hover:bg-white hover:text-pink-900 border border-pink-900'>Re-Order</button>
                       </div>
-                    </Card>
-                  </>
+                    </Card> */}
+
+                    <p>{item.productInfo.name}</p>
+                    <p>{item.productInfo.details}</p>
+                    <img src={item.productInfo.mainImage} alt="..." loading='lazy'  />
+                  </div>
                 )
               })
             }
