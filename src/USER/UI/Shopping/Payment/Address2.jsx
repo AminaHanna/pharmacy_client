@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import axios from "axios";
 import { errorToast, successToast } from '../../../../ExternalComponents/Toast/Toast';
 
@@ -11,6 +11,9 @@ function Address2() {
     const [ pincode,setPincode ] = useState('');
     const [ mode,setMode ] = useState('');
     const { id } = useParams();
+    const { state } = useLocation()
+
+    console.log(state,'state');
 
 
     const navigate = useNavigate();
@@ -18,7 +21,7 @@ function Address2() {
     const addAddress = async(e) =>{
       e.preventDefault()
       try {
-          const response = await axios.post("http://localhost:3000/api/order",{name,address,contact,city,pincode,mode:mode,type:"cart",userId:JSON.parse(localStorage.getItem("users"))._id,productId:id,cartId:id},{headers:{
+          const response = await axios.post("http://localhost:3000/api/order",{name,total:state.totalAmount,address,contact,city,pincode,mode:mode,type:"cart",userId:JSON.parse(localStorage.getItem("users"))._id,productId:id,cartId:id},{headers:{
             'Authorization':`Bearer ${localStorage.getItem("token")}`
           }})
           

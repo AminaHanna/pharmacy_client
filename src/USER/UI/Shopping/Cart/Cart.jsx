@@ -130,7 +130,7 @@ let totalAmount = 0;
             <p className='font-bold text-xs sm:text-base'>Estimated Total</p>
             <p className='font-bold text-xs sm:text-base'>{totalAmount}</p>
           </div>
-            <Link to={'/shipping-addresss'}>
+            <Link to={'/shipping-addresss'} state={{totalAmount}}>
               <button className='bg-pink-900 hover:bg-pink-700 text-white rounded-md px-5 py-2 m-16 text-xs sm:text-base'>
                 PLACE ORDER
               </button>
