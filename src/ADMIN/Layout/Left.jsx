@@ -34,6 +34,9 @@ function Left() {
         <NavLink to={'offer-cards'}>
             <button className='text-xs sm:text-base px-5 py-3 w-full text-start text-pink-900 hover:bg-pink-900 hover:text-white'>Offer Card</button>
         </NavLink>
+        <NavLink to={'coupon'}>
+            <button className='text-xs sm:text-base px-5 py-3 w-full text-start text-pink-900 hover:bg-pink-900 hover:text-white'>Coupon</button>
+        </NavLink>
         <NavLink to={'users'}>
             <button className='text-xs sm:text-base px-5 py-3 w-full text-start text-pink-900 hover:bg-pink-900 hover:text-white'>User Management</button>
         </NavLink>

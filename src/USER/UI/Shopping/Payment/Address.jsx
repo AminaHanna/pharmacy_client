@@ -38,9 +38,10 @@ function Address() {
           if(mode === 'online'){
 
           setOrderDetails({
-            orderId: response.order_id,
-            currency: response.currency,
-            amount: response.amount,
+            orderId: response.data.order_id,
+            currency: response.data.currency,
+            amount: response.data.amount,
+            user_payment_id: response.data.user_payment_id,
           });
           setDisplayRazorpay(true);
 
@@ -175,8 +176,11 @@ function Address() {
       amount={orderDetails.amount}
       currency={orderDetails.currency}
       orderId={orderDetails.orderId}
-      keyId='rzp_test_IYYjwzy1ucmvkA'
-      keySecret='mpg2uvMb65GlFIIvkHOdR4nb'
+      user_payment_id={orderDetails.user_payment_id}
+      // keyId='rzp_test_IYYjwzy1ucmvkA'
+      // keySecret='mpg2uvMb65GlFIIvkHOdR4nb'
+      keyId='rzp_test_tjQX0dLAwK5ZRe'
+      keySecret='l6PExsujC6D9OioOyleXuR1M'
     />
     )}
     </>

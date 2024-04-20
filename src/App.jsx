@@ -68,6 +68,10 @@ import HomePage4_4More from './USER/UI/HomePages/Home4/HomePage4_4More'
 import Succesfull from './USER/UI/Shopping/Payment/Succesfull'
 import UserOrders from './ADMIN/Pages/Orders/OrdersOfUsers'
 import Address2 from './USER/UI/Shopping/Payment/Address2'
+import Coupon from './ADMIN/Pages/Coupons/Coupon'
+import ViewCoupon from './ADMIN/Pages/Coupons/ViewCoupon'
+import EditCoupon from './ADMIN/Pages/Coupons/EditCoupon'
+import AddCoupon from './ADMIN/Pages/Coupons/AddCoupon'
 
 
 
@@ -334,6 +338,24 @@ function App() {
             {
               path:"add-cards",
               element : <AddCards/>
+            }
+          ]
+        },
+        {
+          path: "coupon",
+          element: <Coupon/>,
+          children: [
+            {
+              path: "",
+              element:<ViewCoupon/>
+            },
+            {
+              path:"edit-coupon/:id",
+              element : <EditCoupon/>
+            },
+            {
+              path:"add-coupon",
+              element : <AddCoupon/>
             }
           ]
         },

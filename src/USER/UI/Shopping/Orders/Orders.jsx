@@ -8,18 +8,17 @@ function Orders() {
   const [data,setData] = useState([]);
   useEffect(()=>{
     fetchdata();
-  },[])
+  },[]);
 
 
   const fetchdata = async ()=>{
       try {
-          const response = await axios.get(`http://localhost:3000/api/order/get-orders/${JSON.parse(localStorage.getItem("users"))._id}`)
+          const response = await axios.get(`http://localhost:3000/api/order/user/${JSON.parse(localStorage.getItem("users"))._id}`)
         
           setData(response.data.data);
       } catch (error) {
         setData([]);
-
-          console.log(error);
+        console.log(error);
       }
   }
 
@@ -31,19 +30,18 @@ function Orders() {
             <p className='font-bold'>2 items</p>
           </div>
           <div className="flex flex-wrap my-5 gap-5">
-      
             {
               data.map((item)=>{
                 return(
-                  <div key={item._id} className='flex gap-5 border px-3 py-4 shadow-md'>
+                  <div key={item._id} className='flex flex-col w-[300px] gap-5 border px-3 py-4 shadow-md'>
                     
 
-                    <p>{item.product.name}</p>
-                    <p>{item.product.details}</p>
-                    <img src={item.product.mainImage} alt="..." loading='lazy'  />
+                    <p>{item?.productInformation?.name}</p>
+                    <p>{item?.productInformation?.details}</p>
+                    <img src={item.productInformation?.mainImage} alt="..." width={"200px"} loading='lazy'  />
 
-                    <p>{item.payment?.amount}</p>
-                    <p>order id : {item.payment.orderId}</p>
+                    <p>amount: {item.paymentInformation?.price}</p>
+                    <p>order id : {item.paymentInformation?.orderId}</p>
 
                   </div>
                 )

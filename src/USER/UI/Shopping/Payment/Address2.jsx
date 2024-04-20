@@ -1,9 +1,20 @@
 import React, { useState } from 'react'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from "axios";
 import { errorToast, successToast } from '../../../../ExternalComponents/Toast/Toast';
+import RenderRazorpay from './RenderRazorpay';
+
 
 function Address2() {
+  const [orderDetails, setOrderDetails] = useState({
+    orderId: null,
+    currency: null,
+    amount: null,
+   });
+   const [displayRazorpay, setDisplayRazorpay] = useState(false);
+
+
+
     const [ name,setName ] = useState('');
     const [ address,setAddress ] = useState('');
     const [ contact,setContact ] = useState('');
@@ -11,9 +22,6 @@ function Address2() {
     const [ pincode,setPincode ] = useState('');
     const [ mode,setMode ] = useState('');
     const { id } = useParams();
-    const { state } = useLocation()
-
-    console.log(state,'state');
 
 
     const navigate = useNavigate();
@@ -21,11 +29,23 @@ function Address2() {
     const addAddress = async(e) =>{
       e.preventDefault()
       try {
-          const response = await axios.post("http://localhost:3000/api/order",{name,total:state.totalAmount,address,contact,city,pincode,mode:mode,type:"cart",userId:JSON.parse(localStorage.getItem("users"))._id,productId:id,cartId:id},{headers:{
+          const response = await axios.post("http://localhost:3000/api/order",{name,address,contact,city,pincode,mode:mode,userId:JSON.parse(localStorage.getItem("users"))._id,productId:id},{headers:{
             'Authorization':`Bearer ${localStorage.getItem("token")}`
           }})
           
           console.log(response,"aaa");
+
+          if(mode === 'online'){
+
+          setOrderDetails({
+            orderId: response.data.order_id,
+            currency: response.data.currency,
+            amount: response.data.amount,
+            user_payment_id: response.data.user_payment_id,
+          });
+          setDisplayRazorpay(true);
+
+          }
 
           successToast("Address Added Succesfully");
           // navigate('/successfull');
@@ -33,6 +53,9 @@ function Address2() {
           errorToast(error.message);
         }
   }
+
+
+  
 
 
   return (
@@ -146,8 +169,22 @@ function Address2() {
 
         </div>
     </div>
+
+
+    {displayRazorpay && (
+    <RenderRazorpay
+      amount={orderDetails.amount}
+      currency={orderDetails.currency}
+      orderId={orderDetails.orderId}
+      user_payment_id={orderDetails.user_payment_id}
+      // keyId='rzp_test_IYYjwzy1ucmvkA'
+      // keySecret='mpg2uvMb65GlFIIvkHOdR4nb'
+      keyId='rzp_test_tjQX0dLAwK5ZRe'
+      keySecret='l6PExsujC6D9OioOyleXuR1M'
+    />
+    )}
     </>
   )
 }
 
-export default Address2;
+export default Address2

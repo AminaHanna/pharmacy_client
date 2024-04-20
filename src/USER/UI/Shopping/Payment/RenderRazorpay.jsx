@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import crypto from 'crypto-js';
 import PropTypes from 'prop-types';
-import Axios from 'axios';
+import axios from 'axios';
 
 // Function to load script and append in DOM tree.
 const loadScript = src => new Promise((resolve) => {
@@ -25,7 +25,16 @@ const RenderRazorpay = ({
   keySecret,
   currency,
   amount,
+  user_payment_id
 }) => {
+
+
+  console.log(orderId,'orderId');
+  console.log(keyId,'keyId');
+  console.log(keySecret,'keySecret');
+  console.log(currency,'currency');
+
+
   const paymentId = useRef(null);
   const paymentMethod = useRef(null);
 
@@ -59,10 +68,11 @@ const RenderRazorpay = ({
 
   // informing server about payment
   const handlePayment = async (status, orderDetails = {}) => {
-    await Axios.post(`${serverBaseUrl}/payment`,
+    await axios.post(`http://localhost:3000/api/order/payment`,
       {
         status,
         orderDetails,
+        user_payment_id,
       });
   };
 

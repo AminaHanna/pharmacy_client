@@ -76,6 +76,7 @@ let totalAmount = 0;
           <div className="m-3 flex flex-wrap">
             {
               data.map((item)=>{
+                console.log(item,'----');
                 console.log(totalAmount, 'total');
                 totalAmount = totalAmount + (item.productInfo.price * item.quantity)
                 return(
@@ -129,6 +130,10 @@ let totalAmount = 0;
           <div className="flex justify-between p-2 border-t-2 mt-5">
             <p className='font-bold text-xs sm:text-base'>Estimated Total</p>
             <p className='font-bold text-xs sm:text-base'>{totalAmount}</p>
+          </div>
+
+          <div className="">
+            <button>Apply Coupon</button>
           </div>
             <Link to={'/shipping-addresss'} state={{totalAmount}}>
               <button className='bg-pink-900 hover:bg-pink-700 text-white rounded-md px-5 py-2 m-16 text-xs sm:text-base'>
